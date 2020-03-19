@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.body-tag {
+    margin: 0;
+    background-color: green;
+    color: #fff;
+}
