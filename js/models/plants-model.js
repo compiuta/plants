@@ -1,8 +1,14 @@
 (function() {
     "use strict";
 
-    let plantsModel = {
+    let plantsModelHelpers = function() {
+        
+    }
 
+    let plantsModel = {
+        init: function() {
+            console.log('Plants Model Initialised');
+        }
     }
 
     window.app = window.app || {};
