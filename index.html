@@ -8,5 +8,15 @@
 </head>
 <body class="body-tag">
     <h1>Plants</h1>
+    <form data-search="form" class="search-form">
+        <input data-search="searchInput" type="text" class="search-form__input">
+        <button class="search-button">search</button>
+    </form>
+
+    <div data-search="results" class="search-results"></div>
+
+    <script src="js/models/plants-model.js"></script>
+    <script src="js/views/plants-view.js"></script>
+    <script src="js/controllers/plants-controller.js"></script>
 </body>
 </html>
