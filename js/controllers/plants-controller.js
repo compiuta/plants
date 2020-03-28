@@ -8,7 +8,14 @@
     let plantsController = {
         formSearch: function(e) {
             e.preventDefault();
-            console.log('searching...');
+            app.plantsModel.getData(app.plantsView.searchInput.value);
+            app.plantsView.searchInput.value = '';
+            
+            
+        },
+        populateData: function(data) {
+            const searchData = JSON.stringify(data);
+            app.plantsView.populateElements(searchData);
         },
         init: function() {
             app.plantsModel.init();
