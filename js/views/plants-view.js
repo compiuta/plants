@@ -8,6 +8,7 @@
             app.plantsView.searchResults = document.querySelector('[data-search="results"]');
         },
         bindEvents: function() {
+            window.addEventListener('load', app.plantsController.showSearchResults);
             app.plantsView.searchForm.addEventListener('submit', app.plantsController.formSearch);
         }
     }
