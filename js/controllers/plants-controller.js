@@ -8,10 +8,35 @@
     let plantsController = {
         formSearch: function(e) {
             e.preventDefault();
-            app.plantsModel.getData(app.plantsView.searchInput.value);
-            app.plantsView.searchInput.value = '';
+            const searchValue = app.plantsView.searchInput.value;
+
+            if((window.location.href).indexOf("?") > -1) {
+                const baseUrl = app.plantsController.extractBaseUrl();
+                window.location.href = baseUrl + `?Common_Name=${searchValue}`;
+            } else {
+                window.location.href = window.location.href + `?Common_Name=${searchValue}`;
+            }
+        },
+        extractBaseUrl: function() {
+            const urlArr = window.location.href.split('?');
+            const baseUrl = urlArr[0];
+
+            return baseUrl;
+        },
+        showSearchResults: function() {
+            if(window.location.href.indexOf("?") > -1) {
+                const searchParameter = app.plantsController.extractSearchParameter();
+                app.plantsModel.getData(searchParameter);
+            }
+
+            return;
             
-            
+        },
+        extractSearchParameter: function() {
+            const url = window.location.href;
+            const searchParameter = url.substr(url.indexOf("?"));
+
+            return searchParameter;
         },
         populateData: function(data) {
             const searchData = JSON.stringify(data);
