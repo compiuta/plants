@@ -8,7 +8,7 @@
     let plantsModel = {
         getData: function(searchValue) {
             console.log(searchValue);
-            const searchUrl = `https://plantsdb.xyz/search?Common_Name=${searchValue}`;
+            const searchUrl = `https://plantsdb.xyz/search${searchValue}`;
             console.log(searchUrl);
             fetch(searchUrl)
             .then((response) => response.json())
