@@ -13,7 +13,7 @@
             fetch(searchUrl)
             .then((response) => response.json())
             .then((data) => {
-                app.plantsController.populateData(data);
+                app.plantsController.populateData(JSON.stringify(data));
             })
             .catch((error) => {
                 console.error('Error:', error);
