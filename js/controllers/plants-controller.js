@@ -12,10 +12,14 @@
 
             if((window.location.href).indexOf("?") > -1) {
                 const baseUrl = app.plantsController.extractBaseUrl();
-                window.location.href = baseUrl + `?Common_Name=${searchValue}`;
+                //window.location.href = baseUrl + `?Common_Name=${searchValue}`;
+                window.history.pushState('page2', 'Title', baseUrl + `?Common_Name=${searchValue}`);
             } else {
-                window.location.href = window.location.href + `?Common_Name=${searchValue}`;
+                //window.location.href = window.location.href + `?Common_Name=${searchValue}`;
+                window.history.pushState('page2', 'Title', window.location.href + `?Common_Name=${searchValue}`);
             }
+
+            app.plantsController.showSearchResults();
         },
         extractBaseUrl: function() {
             const urlArr = window.location.href.split('?');
@@ -32,6 +36,15 @@
             return;
             
         },
+        navigateBroserHistory: function() {
+            if(window.location.href.indexOf("?") > -1) {
+                app.plantsController.showSearchResults();
+            } else {
+                app.plantsView.searchResults.innerHTML = '';
+            }
+
+            return;
+        },
         extractSearchParameter: function() {
             const url = window.location.href;
             const searchParameter = url.substr(url.indexOf("?"));
@@ -39,8 +52,7 @@
             return searchParameter;
         },
         populateData: function(data) {
-            const searchData = JSON.stringify(data);
-            app.plantsView.populateElements(searchData);
+            app.plantsView.populateElements(data);
         },
         init: function() {
             app.plantsModel.init();
