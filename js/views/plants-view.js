@@ -9,6 +9,7 @@
         },
         bindEvents: function() {
             window.addEventListener('load', app.plantsController.showSearchResults);
+            window.addEventListener('popstate', app.plantsController.navigateBroserHistory);
             app.plantsView.searchForm.addEventListener('submit', app.plantsController.formSearch);
         }
     }
