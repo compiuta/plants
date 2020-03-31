@@ -1,67 +1,62 @@
 (function(window) {
     "use strict";
 
-    let plantsControllerHelpers = {
-        
+    function extractBaseUrl() {
+        const urlArr = window.location.href.split('?');
+        const baseUrl = urlArr[0];
+
+        return baseUrl;
+    }
+
+    function showSearchResults() {
+        if(window.location.href.indexOf("?") > -1) {
+            const searchParameter = extractSearchParameter();
+            app.plantsModel.getData(searchParameter);
+        }
+
+        return;
+    }
+
+    function formSearch(e) {
+        e.preventDefault();
+        const searchValue = app.plantsView.getSearchInputValue();
+
+        if((window.location.href).indexOf("?") > -1) {
+            const baseUrl = extractBaseUrl();
+            window.history.pushState('page2', 'Title', baseUrl + `?Common_Name=${searchValue}`);
+        } else {
+            window.history.pushState('page2', 'Title', window.location.href + `?Common_Name=${searchValue}`);
+        }
+
+        showSearchResults();
+    }
+
+    function extractSearchParameter() {
+        const url = window.location.href;
+        const searchParameter = url.substr(url.indexOf("?"));
+
+        return searchParameter;
     }
     
     let plantsController = {
         formSearch: function(e) {
-            e.preventDefault();
-            const searchValue = app.plantsView.searchInput.value;
-
-            if((window.location.href).indexOf("?") > -1) {
-                const baseUrl = app.plantsController.extractBaseUrl();
-                //window.location.href = baseUrl + `?Common_Name=${searchValue}`;
-                window.history.pushState('page2', 'Title', baseUrl + `?Common_Name=${searchValue}`);
-            } else {
-                //window.location.href = window.location.href + `?Common_Name=${searchValue}`;
-                window.history.pushState('page2', 'Title', window.location.href + `?Common_Name=${searchValue}`);
-            }
-
-            app.plantsController.showSearchResults();
-        },
-        extractBaseUrl: function() {
-            const urlArr = window.location.href.split('?');
-            const baseUrl = urlArr[0];
-
-            return baseUrl;
+            formSearch(e);
         },
         showSearchResults: function() {
-            if(window.location.href.indexOf("?") > -1) {
-                const searchParameter = app.plantsController.extractSearchParameter();
-                app.plantsModel.getData(searchParameter);
-            }
-
-            return;
-            
+            showSearchResults();
         },
-        navigateBroserHistory: function() {
+        navigateBrowserHistory: function() {
             if(window.location.href.indexOf("?") > -1) {
-                app.plantsController.showSearchResults();
+                showSearchResults();
             } else {
-                app.plantsView.searchResults.innerHTML = '';
+                app.plantsView.render();
             }
-
-            return;
-        },
-        extractSearchParameter: function() {
-            const url = window.location.href;
-            const searchParameter = url.substr(url.indexOf("?"));
-
-            return searchParameter;
         },
         populateData: function(data) {
-            app.plantsView.populateElements(data);
-        },
-        init: function() {
-            app.plantsModel.init();
-            app.plantsView.init();
-            console.log('Plants Controller Initialised');
+            app.plantsView.render(data);
         }
     }
 
     window.app = window.app || {};
     window.app.plantsController = plantsController;
-    app.plantsController.init();
 })(window);
