@@ -1,28 +1,29 @@
 (function(window) {
     "use strict";
 
-    let plantsViewHelpers = {
-        getDomElements: function() {
-            app.plantsView.searchForm = document.querySelector('[data-search="form"]');
-            app.plantsView.searchInput = document.querySelector('[data-search="searchInput"]');
-            app.plantsView.searchResults = document.querySelector('[data-search="results"]');
-        },
-        bindEvents: function() {
-            window.addEventListener('load', app.plantsController.showSearchResults);
-            window.addEventListener('popstate', app.plantsController.navigateBroserHistory);
-            app.plantsView.searchForm.addEventListener('submit', app.plantsController.formSearch);
-        }
-    }
+    //Get dom elements
+    const searchForm = document.querySelector('[data-search="form"]');
+    const searchInput = document.querySelector('[data-search="searchInput"]');
+    const searchResults = document.querySelector('[data-search="results"]');
+    
+    //Bind events
+    window.addEventListener('load', app.plantsController.showSearchResults);
+    window.addEventListener('popstate', app.plantsController.navigateBrowserHistory);
+    searchForm.addEventListener('submit', app.plantsController.formSearch);
+        
 
     let plantsView = {
-        populateElements: function(data) {
-            app.plantsView.searchResults.innerText = '';
-            app.plantsView.searchResults.innerText = data;
+        getSearchInputValue: function() {
+            const searchInputValue = searchInput.value;
+
+            return searchInputValue;
         },
-        init: function() {
-            plantsViewHelpers.getDomElements();
-            plantsViewHelpers.bindEvents();
-            console.log('Plants View Initialised');
+        render: function(data) {
+            searchResults.innerText = '';
+            
+            if(data) {
+                searchResults.innerText = data;
+            }
         }
     }
 
