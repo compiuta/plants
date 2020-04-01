@@ -1,5 +1,26 @@
-(function(window) {
+(function (window) {
     "use strict";
+
+    let currentPageState;
+
+    function getCurrentPageState() {
+        if (window.location.href.indexOf('?') > -1) {
+            currentPageState = 'search';
+        } else if (window.location.href.indexOf('page') > -1) {
+            currentPageState = 'item';
+        } else {
+            currentPageState = 'landing';
+        }
+
+        app.plantsView.togglePageState(currentPageState);
+    }
+
+    function extractSearchParameter() {
+        const url = window.location.href;
+        const searchParameter = url.substr(url.indexOf("?"));
+
+        return searchParameter;
+    }
 
     function extractBaseUrl() {
         const urlArr = window.location.href.split('?');
@@ -9,19 +30,15 @@
     }
 
     function showSearchResults() {
-        if(window.location.href.indexOf("?") > -1) {
-            const searchParameter = extractSearchParameter();
-            app.plantsModel.getData(searchParameter);
-        }
-
-        return;
+        const searchParameter = extractSearchParameter();
+        app.plantsModel.getData(searchParameter);
     }
 
     function formSearch(e) {
         e.preventDefault();
         const searchValue = app.plantsView.getSearchInputValue();
 
-        if((window.location.href).indexOf("?") > -1) {
+        if ((window.location.href).indexOf("?") > -1) {
             const baseUrl = extractBaseUrl();
             window.history.pushState('page2', 'Title', baseUrl + `?Common_Name=${searchValue}`);
         } else {
@@ -31,32 +48,34 @@
         showSearchResults();
     }
 
-    function extractSearchParameter() {
-        const url = window.location.href;
-        const searchParameter = url.substr(url.indexOf("?"));
+    console.log('Controller Initialised');
 
-        return searchParameter;
-    }
-    
-    let plantsController = {
-        formSearch: function(e) {
+    const plantsController = {
+        searchData: {},
+        formSearch: function (e) {
             formSearch(e);
         },
-        showSearchResults: function() {
+        showSearchResults: function () {
             showSearchResults();
         },
-        navigateBrowserHistory: function() {
-            if(window.location.href.indexOf("?") > -1) {
+        getCurrentPageState: function () {
+            getCurrentPageState();
+        },
+        navigateBrowserHistory: function () {
+            getCurrentPageState();
+
+            if (currentPageState === 'search') {
                 showSearchResults();
-            } else {
-                app.plantsView.render();
+            } else if (currentPageState === 'item') {
+                app.plantsView.populateSearchResults();
             }
         },
-        populateData: function(data) {
-            app.plantsView.render(data);
+        populateData: function (data) {
+            app.plantsView.populateSearchResults(data);
+            getCurrentPageState();
         }
     }
 
     window.app = window.app || {};
     window.app.plantsController = plantsController;
-})(window);
+}(window));
