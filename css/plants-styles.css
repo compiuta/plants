@@ -7,3 +7,16 @@
     background-color: green;
     color: #fff;
 }
+
+/* Handle page state */
+.landing-page,
+.search-results,
+.item-page {
+    display: none;
+}
+
+.landing .landing-page,
+.search .search-results,
+.item .item-page {
+    display: block;
+}
