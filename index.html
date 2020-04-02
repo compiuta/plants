@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plants</title>
-    <link rel="stylesheet" href="css/plants-styles.css">
-</head>
-<body data-element="bodyTag" class="landing body-tag">
-    <h1><a href="/plants">Plants</a></h1>
-    <form data-search="form" class="search-form">
-        <input data-search="searchInput" type="text" class="search-form__input">
-        <button class="search-button">search</button>
-    </form>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Plants</title>
+        <link rel="stylesheet" href="css/plants-styles.css">
+    </head>
+    <body data-element="bodyTag" class="landing body-tag">
+        <h1><a href="index.html">Plants</a></h1>
+        <form data-search="form" class="search-form">
+            <input data-search="searchInput" type="text" class="search-form__input">
+            <button class="search-button">search</button>
+        </form>
 
-    <div class="landing-page"></div>
-    <div data-search="results" class="search-results"></div>
-    <div data-search="itemPage" class="item-page">
-        <!-- placeholder -->
-        <h2>Item page</h2>
-    </div>
+        <div class="landing-page"></div>
+        <div class="search-results-container">
+            <div  data-search="results" class="search-results"></div>
+        </div>
+        <div data-search="itemPage" class="item-page">
+            <!-- placeholder -->
+            <h2>Item page</h2>
+        </div>
 
-
-    <script src="js/models/plants-model.js"></script>
-    <script src="js/controllers/plants-controller.js"></script>
-    <script src="js/views/plants-view.js"></script>
-</body>
+        <script src="js/models/plants-model.js"></script>
+        <script src="js/controllers/plants-controller.js"></script>
+        <script src="js/views/plants-view.js"></script>
+    </body>
 </html>
