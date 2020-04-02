@@ -10,13 +10,13 @@
 
 /* Handle page state */
 .landing-page,
-.search-results,
+.search-results-container,
 .item-page {
     display: none;
 }
 
 .landing .landing-page,
-.search .search-results,
+.search .search-results-container,
 .item .item-page {
     display: block;
 }
