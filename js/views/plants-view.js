@@ -22,6 +22,50 @@
             }
         });
     }
+    function populateItemPage() {
+        console.log('populating page');
+    }
+
+    function createSearchResultItem(data) {
+        const itemData = data;
+        const searchItem = document.createElement('a');
+        const searchCommonName = document.createElement('h3');
+        const searchScienceName = document.createElement('h3');
+        const searcItemSymbol = document.createElement('span');
+
+        searchItem.classList.add('plant-search-container');
+        searchCommonName.classList.add('plant-name');
+        searchScienceName.classList.add('plant-name');
+        searcItemSymbol.classList.add('plant-symbol');
+
+        searchCommonName.innerText = itemData.Common_Name;
+        searchScienceName.innerText = itemData.Scientific_Name_x;
+        searcItemSymbol.innerText = itemData.Symbol;
+
+        searchItem.appendChild(searchCommonName);
+        searchItem.appendChild(searchScienceName);
+        searchItem.appendChild(searcItemSymbol);
+
+        searchItem.setAttribute('href', 'javascript:void(0);');
+        searchItem.setAttribute('data-search-item', itemData.Common_Name);
+
+        searchItem.addEventListener('click', populateItemPage);
+
+        return searchItem;
+    }
+
+    function populateSearchResults() {
+        searchResults.innerText = '';
+
+        const searchData = app.plantsController.searchData.data;
+        const dataFragment = document.createDocumentFragment();
+
+        searchData.forEach(function (element) {
+            dataFragment.appendChild(createSearchResultItem(element));
+        });
+
+        searchResults.appendChild(dataFragment);
+    }
 
     //Bind events
     window.addEventListener('load', app.plantsController.navigateBrowserHistory);
@@ -39,16 +83,8 @@
         togglePageState: function (pageState) {
             togglePageState(pageState);
         },
-        populateSearchResults: function (data) {
-            searchResults.innerText = '';
-
-            if (data) {
-                searchResults.innerText = data;
-            }
-        },
-        populateItemPage: function () {
-            app.plantsController.getCurrentPageState();
-            console.log('item page');
+        populateSearchResults: function () {
+            populateSearchResults();
         }
     }
 
