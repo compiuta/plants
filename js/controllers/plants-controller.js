@@ -4,6 +4,7 @@
     let currentPageState;
 
     function getCurrentPageState() {
+        console.log('getting state');
         if (window.location.href.indexOf('?') > -1) {
             currentPageState = 'search';
         } else if (window.location.href.indexOf('page') > -1) {
@@ -11,7 +12,7 @@
         } else {
             currentPageState = 'landing';
         }
-
+        console.log(currentPageState);
         app.plantsView.togglePageState(currentPageState);
     }
 
@@ -45,7 +46,13 @@
             window.history.pushState('page2', 'Title', window.location.href + `?Common_Name=${searchValue}`);
         }
 
+        getCurrentPageState();
+
         showSearchResults();
+    }
+
+    function showItemPage() {
+        app.plantsView.populateItemPage();
     }
 
     console.log('Controller Initialised');
@@ -58,21 +65,20 @@
         showSearchResults: function () {
             showSearchResults();
         },
-        getCurrentPageState: function () {
-            getCurrentPageState();
-        },
         navigateBrowserHistory: function () {
             getCurrentPageState();
 
             if (currentPageState === 'search') {
                 showSearchResults();
             } else if (currentPageState === 'item') {
-                app.plantsView.populateSearchResults();
+                showItemPage();
             }
         },
-        populateData: function (data) {
-            app.plantsView.populateSearchResults(data);
-            getCurrentPageState();
+        showItemPage: function () {
+            showItemPage();
+        },
+        populateData: function () {
+            app.plantsView.populateSearchResults();
         }
     }
 
