@@ -8,9 +8,8 @@
         fetch(searchUrl)
             .then((response) => response.json())
             .then((data) => {
-                const currentSearchData = JSON.stringify(data);
-                app.plantsController.searchData = currentSearchData;
-                app.plantsController.populateData(currentSearchData);
+                app.plantsController.searchData = data;
+                app.plantsController.populateData();
             })
             .catch((error) => {
                 console.error('Error:', error);
