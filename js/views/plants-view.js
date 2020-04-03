@@ -6,6 +6,7 @@
     const searchInput = document.querySelector('[data-search="searchInput"]');
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
+    const itemPage = document.querySelector('[data-search="itemPage"]');
 
     function togglePageState(pageState) {
         const possibleStates = [
@@ -22,8 +23,9 @@
             }
         });
     }
-    function populateItemPage() {
-        console.log('populating page');
+
+    function populateItemPage(pageData) {
+        itemPage.innerText = JSON.stringify(pageData);
     }
 
     function createSearchResultItem(data) {
@@ -47,9 +49,15 @@
         searchItem.appendChild(searcItemSymbol);
 
         searchItem.setAttribute('href', 'javascript:void(0);');
-        searchItem.setAttribute('data-search-item', itemData.Common_Name);
+        searchItem.setAttribute('data-plant-id', itemData.id);
+        searchItem.setAttribute('data-common-name', itemData.Common_Name);
+        searchItem.setAttribute('data-science-name', itemData.Scientific_Name_x);
+        searchItem.setAttribute('data-symbol', itemData.Symbol);
+        searchItem.setAttribute('data-active-growth-period', itemData.Active_Growth_Period);
+        searchItem.setAttribute('data-toxicity', itemData.Toxicity);
+        searchItem.setAttribute('data-bloom-period', itemData.Bloom_Period);
 
-        searchItem.addEventListener('click', populateItemPage);
+        searchItem.addEventListener('click', app.plantsController.getTargetPageInfo);
 
         return searchItem;
     }
@@ -85,6 +93,9 @@
         },
         populateSearchResults: function () {
             populateSearchResults();
+        },
+        populateItemPage: function (pageData) {
+            populateItemPage(pageData);
         }
     }
 
