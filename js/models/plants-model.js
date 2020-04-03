@@ -8,8 +8,14 @@
         fetch(searchUrl)
             .then((response) => response.json())
             .then((data) => {
-                app.plantsController.searchData = data;
-                app.plantsController.populateData();
+                if (searchValue.indexOf('search') > -1) {
+                    app.plantsController.searchData = data;
+                    app.plantsController.populateData();
+                } else if (searchValue.indexOf('id') > -1) {
+                    console.log('hello ' + data);
+
+                    app.plantsController.fetchItemPageData(data);
+                }
             })
             .catch((error) => {
                 console.error('Error:', error);
