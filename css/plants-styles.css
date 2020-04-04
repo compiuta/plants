@@ -6,8 +6,25 @@
     margin: 0;
 }
 
+.max-width-container {
+    max-width: 1800px;
+    padding: 0 20px;
+}
+
 .main-title {
     margin: 0;
+}
+
+.inner-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 75px;
+}
+
+.page-logo-image {
+    width: 15%;
+    color: #fff;
 }
 
 .featured-area {
@@ -28,6 +45,24 @@
 /* landing page design */
 .hero-container {
     display: none;
+}
+
+.hero-title {
+    position: absolute;
+    font-size: 14em;
+    margin: 0;
+    line-height: .8;
+}
+
+.hero-image-container {
+    position: relative;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.hero-image {
+    position: relative;
+    z-index: 1;
 }
 
 .landing .main-header {
