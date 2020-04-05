@@ -94,12 +94,17 @@
 
 .featured-area {
     min-height: 400px;
-    background-color: purple;
+    background: linear-gradient(#118b44, #f8793e);
+    position: relative;
 }
 
 .featured-plants {
     min-height: 300px;
     background-color: grey;
+}
+
+.featured-image-container {
+    overflow: hidden;
 }
 
 .main-footer {
@@ -112,7 +117,8 @@
     display: none;
 }
 
-.hero-title {
+.hero-title,
+.featured-title {
     position: absolute;
     font-size: 14em;
     margin: 0;
@@ -155,6 +161,23 @@
 .plant-info-item {
     font-size: 12px;
     margin: 15px 0;
+}
+
+.featured-image-container {
+    position: relative;
+}
+
+.featured-title {
+    width: 50%;
+    right: 0;
+    text-align: right;
+    color: #fff;
+}
+
+.featured-image {
+    display: block;
+    position: relative;
+    z-index: 1;
 }
 
 .info-info__superscript {
