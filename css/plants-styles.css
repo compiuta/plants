@@ -4,7 +4,37 @@
 
 .body-tag {
     margin: 0;
+    font-family: PT Sans, Arial, Helvetica, sans-serif;
 }
+
+.button {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    display: inline-block;
+    outline: none;
+    *zoom: 1;
+    text-align: center;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 300;
+    letter-spacing: 1px;
+    vertical-align: middle;
+    border: 1px solid #fff;
+    color: #fff;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.01);
+    font-size: 0.9375em;
+    padding: 0.5375em 1.375em;
+    border-radius: 3px;
+    margin: 40px 0 0 0;
+}
+
+.button:hover {
+    background: #fff;
+    color: #333;
+    border-color: #fff;		
+  }
 
 .max-width-container {
     max-width: 1800px;
@@ -22,9 +52,34 @@
     min-height: 75px;
 }
 
+.search-form {
+    position: relative;
+}
+
+.search-form__input {
+    border: none;
+    display: block;
+    width: 100%;
+    font-size: calc(1em + .2vw);
+    color: #333;
+    background-color: #fff;
+    padding: .8em 1em;
+    padding-left: 2.5em;
+    border-radius: 11px;
+    outline: 0;
+}
+
+.search-icon {
+    width: 8%;
+    fill: #333;
+    position: absolute;
+    top: 14px;
+    left: 10px;
+}
+
 .page-logo-image {
-    width: 15%;
-    color: #fff;
+    width: 30%;
+    fill: #fff;
 }
 
 .featured-area {
@@ -52,6 +107,9 @@
     font-size: 14em;
     margin: 0;
     line-height: .8;
+    text-transform: uppercase;
+    bottom: 0;
+    text-align: left;
 }
 
 .hero-image-container {
@@ -63,6 +121,34 @@
 .hero-image {
     position: relative;
     z-index: 1;
+}
+
+.hero-info {
+    width: 33%;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.hero-info-title {
+    margin: 0 0 40px 0;
+    font-size: 42px;
+    text-transform: uppercase;
+}
+
+.plant-info__title {
+    margin: 0;
+    font-size: 26px;
+}
+
+.plant-info-item {
+    font-size: 12px;
+}
+
+.info-info__superscript {
+    font-size: 12px;
+    margin: 0;
 }
 
 .landing .main-header {
