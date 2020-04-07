@@ -18,7 +18,7 @@
 
     function extractSearchParameter() {
         const url = window.location.href;
-        const searchParameter = url.substr(url.indexOf("?"));
+        const searchParameter = url.substr(url.indexOf("&") + 1);
 
         return searchParameter;
     }
@@ -32,6 +32,7 @@
 
     function showSearchResults() {
         const searchParameter = extractSearchParameter();
+        console.log(searchParameter);
         app.plantsModel.getData(searchParameter);
     }
 
