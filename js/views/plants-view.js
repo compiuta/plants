@@ -12,7 +12,8 @@
         const possibleStates = [
             'landing',
             'search',
-            'item'
+            'item',
+            'error'
         ];
 
         possibleStates.forEach(function (element) {
@@ -62,15 +63,37 @@
         return searchItem;
     }
 
+    function createNoSearchResultsElements() {
+        const noResultsContainer = document.createElement('div');
+        const noRestultsTitle = document.createElement('h6');
+
+        noResultsContainer.classList.add('no-results');
+        noRestultsTitle.classList.add('no-results__title');
+
+        noRestultsTitle.innerText = 'No Search Results Found. Try Again :)'
+
+        noResultsContainer.appendChild(noRestultsTitle);
+
+        return noResultsContainer;
+    }
+
     function populateSearchResults() {
+
         searchResults.innerText = '';
 
         const searchData = app.plantsController.searchData.data;
+
+        console.log(searchData);
+
         const dataFragment = document.createDocumentFragment();
 
-        searchData.forEach(function (element) {
-            dataFragment.appendChild(createSearchResultItem(element));
-        });
+        if (searchData) {
+            searchData.forEach(function (element) {
+                dataFragment.appendChild(createSearchResultItem(element));
+            });
+        } else {
+            dataFragment.appendChild(createNoSearchResultsElements());
+        }
 
         searchResults.appendChild(dataFragment);
     }
