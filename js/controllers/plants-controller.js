@@ -47,8 +47,6 @@
             window.history.pushState('page2', 'Title', window.location.href + `?search&Common_Name=${searchValue}`);
         }
 
-        getCurrentPageState();
-
         showSearchResults();
     }
 
@@ -64,9 +62,8 @@
     }
 
     function fetchItemPageData(pageData) {
-        getCurrentPageState();
-
         app.plantsView.populateItemPage(pageData);
+        getCurrentPageState();
     }
 
     function getItemPageData() {
@@ -116,11 +113,10 @@
             showSearchResults();
         },
         navigateBrowserHistory: function (e) {
-            getCurrentPageState();
 
-            if (currentPageState === 'search') {
+            if (window.location.href.indexOf('search') > -1) {
                 showSearchResults();
-            } else if (currentPageState === 'item') {
+            } else if (window.location.href.indexOf('page') > -1) {
                 showItemPage();
             }
         },
@@ -135,6 +131,7 @@
         },
         populateData: function () {
             app.plantsView.populateSearchResults();
+            getCurrentPageState();
         }
     }
 
