@@ -11,7 +11,6 @@
             .then((data) => {
                 if (searchValue.indexOf('id') > -1) {
                     console.log('hello ' + data);
-
                     app.plantsController.fetchItemPageData(data);
                 } else {
                     app.plantsController.searchData = data;
