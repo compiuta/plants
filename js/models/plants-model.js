@@ -3,18 +3,19 @@
 
     function getData(searchValue) {
 
-        const searchUrl = `https://plantsdb.xyz/search${searchValue}`;
+        const searchUrl = `https://plantsdb.xyz/search?${searchValue}`;
+        console.log(searchUrl);
 
         fetch(searchUrl)
             .then((response) => response.json())
             .then((data) => {
-                if (searchValue.indexOf('search') > -1) {
-                    app.plantsController.searchData = data;
-                    app.plantsController.populateData();
-                } else if (searchValue.indexOf('id') > -1) {
+                if (searchValue.indexOf('id') > -1) {
                     console.log('hello ' + data);
 
                     app.plantsController.fetchItemPageData(data);
+                } else {
+                    app.plantsController.searchData = data;
+                    app.plantsController.populateData();
                 }
             })
             .catch((error) => {
