@@ -191,6 +191,7 @@
 
 .landing .main-header {
     height: 100vh;
+    min-height: 635px;
     max-height: 900px;
     background: rgb(17,139,68);
     background: linear-gradient( #47b649, #118b44);
@@ -248,6 +249,17 @@
 }
 /*end landing page design */
 
+.search-results-container {
+    min-height: 100vh;
+    background-color: lightcoral;
+}
+
+/* item page */
+.item-page {
+    min-height: 100vh;
+    background-color: greenyellow;
+}
+/* end item page */
 
 /* Handle page state */
 .landing-page,
