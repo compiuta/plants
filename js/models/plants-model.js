@@ -3,7 +3,7 @@
 
     function getData(searchValue) {
 
-        const searchUrl = `https://plantsdb.xyz/search?${searchValue}`;
+        const searchUrl = `https://plantsdb.xyz/search?limit=30&${searchValue}`;
         console.log(searchUrl);
 
         fetch(searchUrl)
