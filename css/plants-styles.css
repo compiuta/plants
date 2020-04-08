@@ -251,7 +251,30 @@
 
 .search-results-container {
     min-height: 100vh;
-    background-color: lightcoral;
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.plant-search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    background: linear-gradient(#f75e3e, #f8633e);
+    border-radius: 11px;
+    color: #fff;
+}
+
+.search .page-logo-image {
+    fill: #118b44;
+}
+
+.search .search-form__input {
+    border: 1px solid #333;
 }
 
 /* item page */
