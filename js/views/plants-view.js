@@ -29,25 +29,38 @@
         itemPage.innerText = JSON.stringify(pageData);
     }
 
+    function formatImageSrc(imageSrc) {
+        const imageStringArr = imageSrc.toLowerCase().split(',');
+        const imageString = imageStringArr[0].split('/');
+
+        return imageString[0];
+    }
+
     function createSearchResultItem(data) {
         const itemData = data;
         const searchItem = document.createElement('a');
         const searchCommonName = document.createElement('h3');
-        const searchScienceName = document.createElement('h3');
-        const searcItemSymbol = document.createElement('span');
+        const plantImage = document.createElement('img');
+        let plantImageSrc;
+        //const searcItemSymbol = document.createElement('span');
+
+        if (itemData.Growth_Habit) {
+            plantImageSrc = formatImageSrc(itemData.Growth_Habit);
+        } else {
+            plantImageSrc = 'default';
+        }
 
         searchItem.classList.add('plant-search-container');
         searchCommonName.classList.add('plant-name');
-        searchScienceName.classList.add('plant-name');
-        searcItemSymbol.classList.add('plant-symbol');
+        plantImage.classList.add('plant-image');
+        //searcItemSymbol.classList.add('plant-symbol');
 
         searchCommonName.innerText = itemData.Common_Name;
-        searchScienceName.innerText = itemData.Scientific_Name_x;
-        searcItemSymbol.innerText = itemData.Symbol;
+        //searcItemSymbol.innerText = itemData.Symbol;
 
         searchItem.appendChild(searchCommonName);
-        searchItem.appendChild(searchScienceName);
-        searchItem.appendChild(searcItemSymbol);
+        searchItem.appendChild(plantImage);
+        //searchItem.appendChild(searcItemSymbol);
 
         searchItem.setAttribute('href', 'javascript:void(0);');
         searchItem.setAttribute('data-plant-id', itemData.id);
@@ -57,6 +70,8 @@
         searchItem.setAttribute('data-active-growth-period', itemData.Active_Growth_Period);
         searchItem.setAttribute('data-toxicity', itemData.Toxicity);
         searchItem.setAttribute('data-bloom-period', itemData.Bloom_Period);
+
+        plantImage.setAttribute('src', `images/${plantImageSrc}.jpg`);
 
         searchItem.addEventListener('click', app.plantsController.getTargetPageInfo);
 
