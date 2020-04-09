@@ -37,7 +37,6 @@
     }
 
     function formSearch(e) {
-        debugger;
         e.preventDefault();
 
         app.plantsView.toggleLoader();
@@ -65,7 +64,6 @@
     }
 
     function fetchItemPageData(pageData) {
-        debugger;
         app.plantsView.populateItemPage(pageData);
         getCurrentPageState();
         app.plantsView.toggleLoader();
@@ -87,7 +85,6 @@
     }
 
     function showItemPage() {
-        debugger;
 
         const pageData = getItemPageData();
 
@@ -120,7 +117,6 @@
             showSearchResults();
         },
         navigateBrowserHistory: function (e) {
-            debugger;
             if (window.location.href.indexOf('search') > -1) {
                 app.plantsView.toggleLoader();
                 showSearchResults();
@@ -139,7 +135,6 @@
             getTargetPageInfo(e);
         },
         populateData: function () {
-            debugger;
             app.plantsView.populateSearchResults();
             getCurrentPageState();
             app.plantsView.toggleLoader();
