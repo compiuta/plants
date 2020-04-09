@@ -7,6 +7,12 @@
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
     const itemPage = document.querySelector('[data-search="itemPage"]');
+    const loader = document.querySelector('[data-js="loader"]');
+
+    function toggleLoader() {
+        loader.classList.toggle('hide');
+        loader.classList.toggle('show-loader');
+    }
 
     function togglePageState(pageState) {
         const possibleStates = [
@@ -125,6 +131,9 @@
             const searchInputValue = searchInput.value;
 
             return searchInputValue;
+        },
+        toggleLoader: function () {
+            toggleLoader();
         },
         togglePageState: function (pageState) {
             togglePageState(pageState);
