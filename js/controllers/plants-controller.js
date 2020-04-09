@@ -37,7 +37,10 @@
     }
 
     function formSearch(e) {
+        debugger;
         e.preventDefault();
+
+        app.plantsView.toggleLoader();
         const searchValue = app.plantsView.getSearchInputValue();
 
         if ((window.location.href).indexOf("?") > -1) {
@@ -62,8 +65,10 @@
     }
 
     function fetchItemPageData(pageData) {
+        debugger;
         app.plantsView.populateItemPage(pageData);
         getCurrentPageState();
+        app.plantsView.toggleLoader();
     }
 
     function getItemPageData() {
@@ -82,19 +87,21 @@
     }
 
     function showItemPage() {
+        debugger;
 
         const pageData = getItemPageData();
 
         if (pageData) {
             getCurrentPageState();
-
             app.plantsView.populateItemPage(pageData);
+            app.plantsView.toggleLoader();
         } else {
             return;
         }
     }
 
     function getTargetPageInfo(e) {
+        app.plantsView.toggleLoader();
         const pageName = e.currentTarget;
         const baseUrl = extractBaseUrl();
         window.history.pushState('page2', pageName, baseUrl + `?page=${pageName.dataset.plantId}`);
@@ -113,10 +120,12 @@
             showSearchResults();
         },
         navigateBrowserHistory: function (e) {
-
+            debugger;
             if (window.location.href.indexOf('search') > -1) {
+                app.plantsView.toggleLoader();
                 showSearchResults();
             } else if (window.location.href.indexOf('page') > -1) {
+                app.plantsView.toggleLoader();
                 showItemPage();
             }
         },
@@ -130,8 +139,10 @@
             getTargetPageInfo(e);
         },
         populateData: function () {
+            debugger;
             app.plantsView.populateSearchResults();
             getCurrentPageState();
+            app.plantsView.toggleLoader();
         }
     }
 
