@@ -271,6 +271,31 @@
     background: linear-gradient(#f75e3e, #f8633e);
     border-radius: 11px;
     color: #fff;
+    position: relative;
+    padding: 10px;
+    margin: 0 0 20px 0;
+    min-height: 280px;
+}
+
+.plant-image {
+    max-width: 50%;
+}
+
+.plant-name {
+    position: absolute;
+    top: 0;
+    font-size: 30px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    left: 0;
+    padding: 0 10px;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search .page-logo-image {
@@ -279,6 +304,23 @@
 
 .search .search-form__input {
     border: 1px solid #333;
+}
+
+.no-results {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url('../images/no-results.png');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+}
+
+.no-results__title {
+    font-size: 3em;
+    width: 400px;
+    margin: 0;
 }
 
 /* item page */
