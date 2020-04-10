@@ -77,7 +77,7 @@
         searchItem.setAttribute('data-toxicity', itemData.Toxicity);
         searchItem.setAttribute('data-bloom-period', itemData.Bloom_Period);
 
-        plantImage.setAttribute('src', `images/${plantImageSrc}.jpg`);
+        plantImage.setAttribute('src', `images/${plantImageSrc}.png`);
 
         searchItem.addEventListener('click', app.plantsController.getTargetPageInfo);
 
