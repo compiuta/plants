@@ -4,7 +4,6 @@
     let currentPageState;
 
     function getCurrentPageState() {
-        console.log('getting state');
         if (window.location.href.indexOf('search') > -1) {
             currentPageState = 'search';
         } else if (window.location.href.indexOf('page') > -1) {
@@ -12,7 +11,7 @@
         } else {
             currentPageState = 'landing';
         }
-        console.log(currentPageState);
+        console.log(`current state is: ${currentPageState} page`);
         app.plantsView.togglePageState(currentPageState);
     }
 
@@ -32,7 +31,6 @@
 
     function showSearchResults() {
         const searchParameter = extractSearchParameter();
-        console.log(searchParameter);
         app.plantsModel.getData(searchParameter);
     }
 
@@ -79,8 +77,7 @@
             data =  searchLocalData(itemId);
             return data;
         } else {
-            console.log(`?id=${itemId}`);
-            app.plantsModel.getData(`?id=${itemId}`);
+            app.plantsModel.getData(`id=${itemId}`);
         }
     }
 
