@@ -41,7 +41,7 @@
   }
 
 .max-width-container {
-    max-width: 1800px;
+    max-width: 1750px;
     padding: 0 20px;
     margin: 0 auto;
 }
@@ -91,8 +91,13 @@
     left: 10px;
 }
 
+.page-logo {
+    width: 136px;
+    margin-right: 25px;
+}
+
 .page-logo-image {
-    width: 30%;
+    width: 75%;
     fill: #fff;
 }
 
@@ -125,6 +130,7 @@
 .hero-image {
     position: relative;
     z-index: 1;
+    max-width: 100%;
 }
 
 .hero-info {
@@ -211,9 +217,6 @@
     background: linear-gradient(#f8793e, #2c2e45);
 }
 
-.explore-inner-container {
-}
-
 .explore-plants {
     padding: 200px 0 0 0;
 }
@@ -260,21 +263,26 @@
 .search-results {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    margin: 0 -10px;
 }
 
 .plant-search-container {
     display: flex;
+    width: calc(100% / 3);
+    padding: 10px;
+    min-height: 280px;
+}
+
+.plant-search-inner {
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 30%;
+    position: relative;
     background: linear-gradient(#f75e3e, #f8633e);
     border-radius: 11px;
     color: #fff;
-    position: relative;
+    flex: 1 1 auto;
     padding: 10px;
-    margin: 0 0 20px 0;
-    min-height: 280px;
 }
 
 .plant-image {
@@ -440,4 +448,85 @@
             transform: rotate(360deg) translate3d(0, -42px, 0);
     -webkit-animation-delay: 0.78s;
             animation-delay: 0.78s;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    .landing .main-header {
+        height: unset;
+    }
+
+    .hero-title,
+    .featured-title,
+    .explore-plant-type {
+        font-size: 8em;
+    }
+
+    .hero-info {
+        width: 50%;
+    }
+  }
+
+  @media only screen and (max-width: 750px) {
+    .landing .main-header {
+        padding-bottom: 60px;
+        min-height: 0;
+    }
+
+    .landing-navigation {
+        display: none;
+    }
+
+    .landing .hero-container {
+        flex-direction: column; 
+    }
+
+    .hero-title,
+    .featured-title,
+    .explore-plant-type {
+        font-size: 3em;
+    }
+
+    .hero-info-title,
+    .plant-info-item {
+        display: none;
+    }
+
+    .hero-info {
+        margin: 0;
+        width: 100%;
+    }
+
+    .featured-area {
+        min-height: 0;
+        padding-bottom: 100px;
+    }
+
+    .featured-button {
+        bottom: 0;
+    }
+
+    .explore-plants {
+        padding: 0;
+    }
+
+    .explore-info {
+        top: 20%;
+    }
+
+    .button {
+        margin: 8px 0 0 0;
+    }
+
+    .explore-image {
+        max-width: 50%;
+    }
+
+    .plant-search-container {
+        width: calc(100% / 2);
+        min-height: 185px;
+    }
+
+    .plant-name {
+        font-size: 20px;
+    }
   }
