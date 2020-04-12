@@ -45,6 +45,7 @@
     function createSearchResultItem(data) {
         const itemData = data;
         const searchItem = document.createElement('a');
+        const searchItemInner = document.createElement('div');
         const searchCommonName = document.createElement('h3');
         const plantImage = document.createElement('img');
         let plantImageSrc;
@@ -57,6 +58,7 @@
         }
 
         searchItem.classList.add('plant-search-container');
+        searchItemInner.classList.add('plant-search-inner');
         searchCommonName.classList.add('plant-name');
         plantImage.classList.add('plant-image');
         //searcItemSymbol.classList.add('plant-symbol');
@@ -64,8 +66,9 @@
         searchCommonName.innerText = itemData.Common_Name;
         //searcItemSymbol.innerText = itemData.Symbol;
 
-        searchItem.appendChild(searchCommonName);
-        searchItem.appendChild(plantImage);
+        searchItemInner.appendChild(searchCommonName);
+        searchItemInner.appendChild(plantImage);
+        searchItem.appendChild(searchItemInner);
         //searchItem.appendChild(searcItemSymbol);
 
         searchItem.setAttribute('href', 'javascript:void(0);');
@@ -91,7 +94,7 @@
         noResultsContainer.classList.add('no-results');
         noRestultsTitle.classList.add('no-results__title');
 
-        noRestultsTitle.innerText = 'No Search Results Found. Try Again :)'
+        noRestultsTitle.innerText = 'Nothing to see here. Try a different search :)';
 
         noResultsContainer.appendChild(noRestultsTitle);
 
