@@ -8,6 +8,14 @@
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
     const itemPage = document.querySelector('[data-search="itemPage"]');
     const loader = document.querySelector('[data-js="loader"]');
+    const currentYearArr = document.querySelectorAll('[data-js="currentYear"]');
+
+    function populateCurrentYear() {
+        const currentDate = new Date();
+        currentYearArr.forEach(element => {
+            element.innerText = currentDate.getFullYear();
+        });
+    }
 
     function toggleLoader() {
         loader.classList.toggle('hide');
@@ -126,6 +134,8 @@
     window.addEventListener('load', app.plantsController.navigateBrowserHistory);
     window.addEventListener('popstate', app.plantsController.navigateBrowserHistory);
     searchForm.addEventListener('submit', app.plantsController.formSearch);
+
+    populateCurrentYear();
 
     console.log('View Initialised');
 
