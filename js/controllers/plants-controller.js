@@ -75,6 +75,7 @@
 
         if (searchLocalData(itemId)) {
             data =  searchLocalData(itemId);
+            console.log(data);
             return data;
         } else {
             app.plantsModel.getData(`id=${itemId}`);
@@ -84,6 +85,8 @@
     function showItemPage() {
 
         const pageData = getItemPageData();
+
+        console.log(pageData);
 
         if (pageData) {
             getCurrentPageState();
