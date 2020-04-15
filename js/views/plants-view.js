@@ -53,7 +53,8 @@
 
 
     function populateItemPage(pageData) {
-        const data = pageData.data[0];
+        console.log(pageData);
+        const data = pageData;
         let  imagePath;
 
         if(data.Growth_Habit) {

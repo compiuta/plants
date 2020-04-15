@@ -9,11 +9,13 @@
         fetch(searchUrl)
             .then((response) => response.json())
             .then((data) => {
+
+                app.plantsController.searchData = data;
+
                 if (searchValue.indexOf('id') > -1) {
                     console.log('hello ' + data);
-                    app.plantsController.fetchItemPageData(data);
+                    app.plantsController.fetchItemPageData(data.data[0]);
                 } else {
-                    app.plantsController.searchData = data;
                     app.plantsController.populateData();
                 }
             })
