@@ -6,9 +6,15 @@
     const searchInput = document.querySelector('[data-search="searchInput"]');
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
-    const itemPage = document.querySelector('[data-search="itemPage"]');
+    const itemPageContainer = document.querySelector('[data-search="itemPage"]');
     const loader = document.querySelector('[data-js="loader"]');
     const currentYearArr = document.querySelectorAll('[data-js="currentYear"]');
+    const itemPropertiesContainer = document.querySelector('[data-item="properties"]');
+    const itemPageImage = document.querySelector('[data-item="image"]');
+    const itemPageTitle = document.querySelector('[data-item="title"]');
+    const itemPageId = document.querySelector('[data-item="id"]');
+    const itemPageSymbol = document.querySelector('[data-item="symbol"]');
+    const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
 
     function populateCurrentYear() {
         const currentDate = new Date();
@@ -39,15 +45,31 @@
         });
     }
 
-    function populateItemPage(pageData) {
-        itemPage.innerText = JSON.stringify(pageData);
-    }
-
     function formatImageSrc(imageSrc) {
         const imageStringArr = imageSrc.toLowerCase().split(',');
         const imageString = imageStringArr[0].split('/');
-
         return imageString[0];
+    }
+
+
+    function populateItemPage(pageData) {
+        const data = pageData.data[0];
+        let  imagePath;
+
+        if(data.Growth_Habit) {
+            imagePath = formatImageSrc(data.Growth_Habit);
+        } else {
+            imagePath = 'default';
+        }
+
+        console.log(data);
+        console.log(itemPageTitle);
+
+        itemPageImage.src = `images/${imagePath}.png`;
+        itemPageTitle.innerText = data.Common_Name;
+        itemPageId.innerText = data.id
+        itemPageSymbol.innerText = data.Symbol
+        ItemPageScienceName.innerText = data.Scientific_Name_x;
     }
 
     function createSearchResultItem(data) {
