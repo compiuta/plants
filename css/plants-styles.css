@@ -309,7 +309,7 @@
     border-color: #461c1c;
 }
 
-..explore-button:hover {
+.explore-button:hover {
     border: 0;
 }
 
@@ -401,9 +401,30 @@
 
 /* item page */
 .item-page {
-    min-height: 100vh;
-    background-color: greenyellow;
+    
 }
+
+.item-page-inner {
+    display: flex;
+    max-width: 1750px;
+    padding: 0 20px;
+    margin: 0 auto;
+    min-height: calc(100vh - 75px);
+}
+
+.item-properties-container {
+    flex: 1 1 auto;
+}
+
+.item-info-container {
+    width: 30%;
+    background: linear-gradient(#47b663, #46b663);
+}
+
+.item-page-image {
+    width: 100%;
+}
+
 /* end item page */
 
 /* Handle page state */
