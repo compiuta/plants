@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 .body-tag {
     margin: 0;
     font-family: PT Sans, Arial, Helvetica, sans-serif;
@@ -274,6 +278,10 @@
     background: rgb(17,139,68);
     background: linear-gradient( #47b649, #118b44);
     color: #fff;
+}
+
+.landing .main-footer {
+    min-height: 400px;
 }
 
 .landing .hero-container {
