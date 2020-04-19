@@ -45,6 +45,33 @@
         });
     }
 
+    function createItemPropertyElements(property) {
+        const propertyContainer = document.createElement('div');
+        const propertyTitle = document.createElement('h6');
+
+        propertyContainer.classList.add('item-property-container');
+        propertyTitle.classList.add('item-property-title');
+
+        propertyTitle.innerText = property;
+        propertyContainer.appendChild(propertyTitle);
+
+        return propertyContainer;
+    }
+
+    function populateItemProperties(data) {
+
+        const fragment = document.createDocumentFragment();
+
+        Object.keys(data).forEach(function(key) {
+            console.log(key);
+            const propertyElement = createItemPropertyElements(data[key]);
+            console.log(propertyElement);
+            fragment.appendChild(propertyElement);
+        });
+
+        itemPropertiesContainer.appendChild(fragment);
+    }
+
     function formatImageSrc(imageSrc) {
         const imageStringArr = imageSrc.toLowerCase().split(',');
         const imageString = imageStringArr[0].split('/');
@@ -55,6 +82,9 @@
     function populateItemPage(pageData) {
         console.log(pageData);
         const data = pageData;
+
+        populateItemProperties(data);
+
         let  imagePath;
 
         if(data.Growth_Habit) {
