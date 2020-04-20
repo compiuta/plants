@@ -78,13 +78,7 @@
         return imageString[0];
     }
 
-
-    function populateItemPage(pageData) {
-        console.log(pageData);
-        const data = pageData;
-
-        populateItemProperties(data);
-
+    function populateItemInfoArea(data) {
         let  imagePath;
 
         if(data.Growth_Habit) {
@@ -93,14 +87,23 @@
             imagePath = 'default';
         }
 
-        console.log(data);
-        console.log(itemPageTitle);
-
         itemPageImage.src = `images/${imagePath}.png`;
         itemPageTitle.innerText = data.Common_Name;
         itemPageId.innerText = data.id
         itemPageSymbol.innerText = data.Symbol
         ItemPageScienceName.innerText = data.Scientific_Name_x;
+    }
+
+
+    function populateItemPage(pageData) {
+        console.log(pageData);
+        const data = pageData;
+
+        console.log(data);
+        console.log(itemPageTitle);
+
+        populateItemProperties(data);
+        populateItemInfoArea(data);
     }
 
     function createSearchResultItem(data) {
@@ -110,7 +113,6 @@
         const searchCommonName = document.createElement('h3');
         const plantImage = document.createElement('img');
         let plantImageSrc;
-        //const searcItemSymbol = document.createElement('span');
 
         if (itemData.Growth_Habit) {
             plantImageSrc = formatImageSrc(itemData.Growth_Habit);
@@ -122,24 +124,15 @@
         searchItemInner.classList.add('plant-search-inner');
         searchCommonName.classList.add('plant-name');
         plantImage.classList.add('plant-image');
-        //searcItemSymbol.classList.add('plant-symbol');
 
         searchCommonName.innerText = itemData.Common_Name;
-        //searcItemSymbol.innerText = itemData.Symbol;
 
         searchItemInner.appendChild(searchCommonName);
         searchItemInner.appendChild(plantImage);
         searchItem.appendChild(searchItemInner);
-        //searchItem.appendChild(searcItemSymbol);
 
         searchItem.setAttribute('href', 'javascript:void(0);');
         searchItem.setAttribute('data-plant-id', itemData.id);
-        searchItem.setAttribute('data-common-name', itemData.Common_Name);
-        searchItem.setAttribute('data-science-name', itemData.Scientific_Name_x);
-        searchItem.setAttribute('data-symbol', itemData.Symbol);
-        searchItem.setAttribute('data-active-growth-period', itemData.Active_Growth_Period);
-        searchItem.setAttribute('data-toxicity', itemData.Toxicity);
-        searchItem.setAttribute('data-bloom-period', itemData.Bloom_Period);
 
         plantImage.setAttribute('src', `images/${plantImageSrc}.png`);
 
