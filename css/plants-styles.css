@@ -420,8 +420,32 @@ html {
     min-height: calc(100vh - 75px);
 }
 
+.item-page__side-nav {
+    min-width:80px;
+    display: flex;
+    flex-direction: column;
+    background-color: #f4fafc;
+    border-radius: 20px;
+}
+
+.side-nav__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    margin: 0 0 10px 0;
+    border-radius: 20px;
+    transition: background-color .1s ease-in-out;
+}
+
+.side-nav__button:hover,
+.side-nav__button--active {
+    background-color: #4abf69;
+}
+
 .item-page-properties-container {
     flex: 1 1 auto;
+    margin: 0 20px;
 }
 
 .item-properties-container {
