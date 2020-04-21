@@ -421,11 +421,24 @@ html {
 }
 
 .item-page__side-nav {
-    min-width:80px;
+    min-width: 80px;
     display: flex;
     flex-direction: column;
     background-color: #f4fafc;
     border-radius: 20px;
+}
+
+.side-nav__page-icon {
+    align-self: center;
+    padding: 10px 4px;
+    background: linear-gradient(#f86a3e, #f98240);
+    border-radius: 10px;
+    margin: 12px 0;
+}
+
+.item-page-logo {
+    fill: #000;
+    width: 46px;
 }
 
 .side-nav__button {
@@ -436,16 +449,19 @@ html {
     margin: 0 0 10px 0;
     border-radius: 20px;
     transition: background-color .1s ease-in-out;
+    text-decoration: none;
+    font-size: 25px;
 }
 
 .side-nav__button:hover,
 .side-nav__button--active {
     background-color: #4abf69;
+    color: #fff;
 }
 
 .item-page-properties-container {
     flex: 1 1 auto;
-    margin: 0 20px;
+    margin: 0 36px;
 }
 
 .item-properties-container {
