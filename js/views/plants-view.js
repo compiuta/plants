@@ -45,15 +45,26 @@
         });
     }
 
-    function createItemPropertyElements(property) {
+    function createItemPropertyElements(key, value) {
         const propertyContainer = document.createElement('div');
+        const propertyTitleContainer = document.createElement('div');
         const propertyTitle = document.createElement('h6');
+        const keyNameContainer = document.createElement('div');
+        const keyNameElement = document.createElement('h6');
 
         propertyContainer.classList.add('item-property-container');
+        keyNameContainer.classList.add('item-key-name-container');
+        keyNameElement.classList.add('item-key-name');
+        propertyTitleContainer.classList.add('item-title-container');
         propertyTitle.classList.add('item-property-title');
 
-        propertyTitle.innerText = property;
-        propertyContainer.appendChild(propertyTitle);
+        keyNameElement.innerText = key;
+        propertyTitle.innerText = value;
+
+        keyNameContainer.appendChild(keyNameElement);
+        propertyTitleContainer.appendChild(propertyTitle);
+        propertyContainer.appendChild(keyNameContainer);
+        propertyContainer.appendChild(propertyTitleContainer);
 
         return propertyContainer;
     }
@@ -63,10 +74,11 @@
         const fragment = document.createDocumentFragment();
 
         Object.keys(data).forEach(function(key) {
-            console.log(key);
-            const propertyElement = createItemPropertyElements(data[key]);
-            console.log(propertyElement);
-            fragment.appendChild(propertyElement);
+            if (data[key] !== '') {
+                console.log(key);
+                const propertyElement = createItemPropertyElements(key, data[key]);
+                fragment.appendChild(propertyElement);
+            }
         });
 
         itemPropertiesContainer.appendChild(fragment);
