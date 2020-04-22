@@ -38,7 +38,7 @@
         e.preventDefault();
 
         app.plantsView.toggleLoader();
-        const searchValue = app.plantsView.getSearchInputValue();
+        const searchValue = app.plantsView.getSearchInputValue(e.target);
 
         if ((window.location.href).indexOf("?") > -1) {
             const baseUrl = extractBaseUrl();
