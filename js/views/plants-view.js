@@ -2,8 +2,7 @@
     "use strict";
 
     //Get dom elements
-    const searchForm = document.querySelector('[data-search="form"]');
-    const searchInput = document.querySelector('[data-search="searchInput"]');
+    const searchFormElements = document.querySelectorAll('[data-search="form"]');
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
     const itemPageContainer = document.querySelector('[data-search="itemPage"]');
@@ -191,15 +190,17 @@
     //Bind events
     window.addEventListener('load', app.plantsController.navigateBrowserHistory);
     window.addEventListener('popstate', app.plantsController.navigateBrowserHistory);
-    searchForm.addEventListener('submit', app.plantsController.formSearch);
+    searchFormElements.forEach(function (element) {
+        element.addEventListener('submit', app.plantsController.formSearch);
+    });
 
     populateCurrentYear();
 
     console.log('View Initialised');
 
     const plantsView = {
-        getSearchInputValue: function () {
-            const searchInputValue = searchInput.value;
+        getSearchInputValue: function (form) {
+            const searchInputValue = form.querySelector('[data-search="searchInput"]').value;
 
             return searchInputValue;
         },
