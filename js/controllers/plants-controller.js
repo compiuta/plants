@@ -7,7 +7,7 @@
         if (window.location.href.indexOf('search') > -1) {
             currentPageState = 'search';
         } else if (window.location.href.indexOf('page') > -1) {
-            currentPageState = 'item';
+            currentPageState = 'item-page';
         } else {
             currentPageState = 'landing';
         }
