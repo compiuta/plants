@@ -31,7 +31,7 @@
         const possibleStates = [
             'landing',
             'search',
-            'item',
+            'item-page',
             'error'
         ];
 
