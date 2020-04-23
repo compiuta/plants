@@ -408,7 +408,7 @@ html {
 }
 
 /* item page */
-.body-tag.item .main-header {
+.body-tag.item-page .main-header {
     display: none;
 }
 
@@ -465,6 +465,21 @@ html {
     position: relative;
     display: flex;
     flex-direction: column;
+}
+
+.item-page .search-form__input {
+    background-color: #f4fafc;
+    color: #afc1c6;
+}
+
+.item-page .search-form__input::placeholder {
+    color: #afc1c6;
+    opacity: 1;
+}
+
+
+.item-page .search-icon {
+    fill: #afc1c6;
 }
 
 .item-properties-container {
@@ -539,13 +554,13 @@ html {
 /* Handle page state */
 .landing-page,
 .search-results-container,
-.item-page {
+.item-page-container {
     display: none;
 }
 
 .landing .landing-page,
 .search .search-results-container,
-.item .item-page {
+.item-page .item-page-container {
     display: block;
 }
 
