@@ -9,11 +9,13 @@
     const loader = document.querySelector('[data-js="loader"]');
     const currentYearArr = document.querySelectorAll('[data-js="currentYear"]');
     const itemPropertiesContainer = document.querySelector('[data-item="properties"]');
+    const itemInnerContainer = document.querySelector('[data-item="innerPropertiesContainer"]');
     const itemPageImage = document.querySelector('[data-item="image"]');
     const itemPageTitle = document.querySelector('[data-item="title"]');
     const itemPageId = document.querySelector('[data-item="id"]');
     const itemPageSymbol = document.querySelector('[data-item="symbol"]');
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
+    let itemPagePropertyWrapArr;
 
     function populateCurrentYear() {
         const currentDate = new Date();
@@ -44,6 +46,16 @@
         });
     }
 
+    function createContainerForPropertyElements() {
+        const container = document.createElement('div');
+
+        container.classList.add('item-properties-wrap');
+
+        container.setAttribute('data-item', 'itemPropertiesWrap');
+
+        return container;
+    }
+
     function createItemPropertyElements(key, value) {
         const propertyContainer = document.createElement('div');
         const propertyTitleContainer = document.createElement('div');
@@ -71,12 +83,24 @@
     function populateItemProperties(data) {
 
         const fragment = document.createDocumentFragment();
+        let propertiesWrap = createContainerForPropertyElements();
+        let indexCount = 1;
 
-        Object.keys(data).forEach(function(key) {
+        Object.keys(data).forEach(function(key, index) {
             if (data[key] !== '') {
-                console.log(key);
                 const propertyElement = createItemPropertyElements(key, data[key]);
-                fragment.appendChild(propertyElement);
+                propertiesWrap.appendChild(propertyElement);
+                indexCount += 1;
+                console.log(indexCount);
+
+                if((indexCount % 6) === 0 || (index+=1) === Object.keys(data).length) {
+                    fragment.appendChild(propertiesWrap);
+                    propertiesWrap = createContainerForPropertyElements();
+                    console.log('end');
+                }
+            } else if ((index+=1) === Object.keys(data).length) {
+                console.log('end');
+                fragment.appendChild(propertiesWrap);
             }
         });
 
@@ -105,6 +129,13 @@
         ItemPageScienceName.innerText = data.Scientific_Name_x;
     }
 
+    function resizePropertyWrappers() {
+        const itemInnerContainerWidth = `${itemInnerContainer.offsetWidth}px`;
+
+        itemPagePropertyWrapArr.forEach(function (element) {
+            element.style.width = itemInnerContainerWidth;
+        });
+    }
 
     function populateItemPage(pageData) {
         console.log(pageData);
@@ -115,6 +146,12 @@
 
         populateItemProperties(data);
         populateItemInfoArea(data);
+
+        itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
+
+        resizePropertyWrappers();
+
+        window.addEventListener('resize', resizePropertyWrappers);
     }
 
     function createSearchResultItem(data) {
