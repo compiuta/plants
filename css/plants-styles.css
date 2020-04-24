@@ -482,19 +482,13 @@ html {
     fill: #afc1c6;
 }
 
-.item-properties-container {
-    flex: 1 1 auto;
-}
-
 .inner-properties-container {
     position: relative;
     flex: 1 1 auto;
     overflow: hidden;
 }
 
-.properties-wrapper {
-    height: 100%;
-    width: 100%;
+.item-properties-container {
     position: absolute;
 }
 
