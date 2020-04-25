@@ -64,6 +64,7 @@
     function fetchItemPageData(pageData) {
         app.plantsView.populateItemPage(pageData);
         getCurrentPageState();
+        app.plantsView.resizePropertyWrappers();
         app.plantsView.toggleLoader();
     }
 
