@@ -132,6 +132,8 @@
     function resizePropertyWrappers() {
         const itemInnerContainerWidth = `${itemInnerContainer.offsetWidth}px`;
 
+        console.log(itemInnerContainerWidth);
+
         itemPagePropertyWrapArr.forEach(function (element) {
             element.style.width = itemInnerContainerWidth;
         });
@@ -148,8 +150,6 @@
         populateItemInfoArea(data);
 
         itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
-
-        resizePropertyWrappers();
 
         window.addEventListener('resize', resizePropertyWrappers);
     }
@@ -252,6 +252,10 @@
         },
         populateItemPage: function (pageData) {
             populateItemPage(pageData);
+        },
+        resizePropertyWrappers: function () {
+            resizePropertyWrappers();
+            console.log('resizing');
         }
     }
 
