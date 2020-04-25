@@ -490,6 +490,8 @@ html {
 
 .item-properties-container {
     position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .item-info-container {
@@ -497,7 +499,7 @@ html {
     background: linear-gradient(#47b663, #46b663);
     border-radius: 20px;
     color: #fff;
-    padding: 20px;
+    padding: 20px;                     
 }
 
 .item-info-area {
