@@ -15,6 +15,7 @@
     const itemPageId = document.querySelector('[data-item="id"]');
     const itemPageSymbol = document.querySelector('[data-item="symbol"]');
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
+    let sliderButtons;
     let itemPagePropertyWrapArr;
 
     function populateCurrentYear() {
@@ -46,12 +47,13 @@
         });
     }
 
-    function createContainerForPropertyElements() {
+    function createContainerForPropertyElements(iteration) {
         const container = document.createElement('div');
 
         container.classList.add('item-properties-wrap');
 
         container.setAttribute('data-item', 'itemPropertiesWrap');
+        container.setAttribute('data-slider-index', iteration)
 
         return container;
     }
@@ -83,23 +85,22 @@
     function populateItemProperties(data) {
 
         const fragment = document.createDocumentFragment();
-        let propertiesWrap = createContainerForPropertyElements();
         let indexCount = 1;
+        let propertyContainerIteration = 1;
+        let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
         Object.keys(data).forEach(function(key, index) {
             if (data[key] !== '') {
                 const propertyElement = createItemPropertyElements(key, data[key]);
                 propertiesWrap.appendChild(propertyElement);
                 indexCount += 1;
-                console.log(indexCount);
 
                 if((indexCount % 6) === 0 || (index+=1) === Object.keys(data).length) {
+                    propertyContainerIteration += 1;
                     fragment.appendChild(propertiesWrap);
-                    propertiesWrap = createContainerForPropertyElements();
-                    console.log('end');
+                    propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
                 }
             } else if ((index+=1) === Object.keys(data).length) {
-                console.log('end');
                 fragment.appendChild(propertiesWrap);
             }
         });
@@ -129,6 +130,12 @@
         ItemPageScienceName.innerText = data.Scientific_Name_x;
     }
 
+    function sliderResize() {
+        if(itemPropertiesContainer.style.left) {
+
+        }
+    }
+
     function resizePropertyWrappers() {
         const itemInnerContainerWidth = `${itemInnerContainer.offsetWidth}px`;
 
@@ -137,6 +144,27 @@
         itemPagePropertyWrapArr.forEach(function (element) {
             element.style.width = itemInnerContainerWidth;
         });
+
+        sliderResize();
+    }
+
+    function moveSlider(e) {
+        const sliderDirection = e.target.dataset.sliderDirection;
+        const itemPropertiesContainerSize = +itemPropertiesContainer.style.left.slice(0, itemPropertiesContainer.style.left.indexOf('p'));
+        let sliderResize;
+
+        if(sliderDirection === 'left') {
+            sliderResize = itemInnerContainer.offsetWidth;
+        } else {
+            sliderResize = +('-' + itemInnerContainer.offsetWidth);
+        }
+
+        console.log(typeof sliderResize);
+        itemPropertiesContainer.style.left = itemPropertiesContainerSize + sliderResize + 'px';
+    }
+
+    function sliderModule() {
+
     }
 
     function populateItemPage(pageData) {
@@ -150,6 +178,11 @@
         populateItemInfoArea(data);
 
         itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
+        sliderButtons = document.querySelectorAll('[data-slider="button"]');
+
+        sliderButtons.forEach(function (button) {
+            button.addEventListener('click', moveSlider);
+        });
 
         window.addEventListener('resize', resizePropertyWrappers);
     }
