@@ -5,7 +5,6 @@
     const searchFormElements = document.querySelectorAll('[data-search="form"]');
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
-    const itemPageContainer = document.querySelector('[data-search="itemPage"]');
     const loader = document.querySelector('[data-js="loader"]');
     const currentYearArr = document.querySelectorAll('[data-js="currentYear"]');
     const itemPropertiesContainer = document.querySelector('[data-item="properties"]');
@@ -15,7 +14,8 @@
     const itemPageId = document.querySelector('[data-item="id"]');
     const itemPageSymbol = document.querySelector('[data-item="symbol"]');
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
-    let sliderButtons;
+    let sliderLeftButton;
+    let sliderRightButton;
     let itemPagePropertyWrapArr;
 
     function populateCurrentYear() {
@@ -148,9 +148,25 @@
         sliderResize();
     }
 
+    function calculateItemPropertiesContainerSize() {
+        const itemPropertiesContainerSize = +itemPropertiesContainer.style.left.slice(0, itemPropertiesContainer.style.left.indexOf('p'));
+
+        return itemPropertiesContainerSize;
+    }
+
+    function hideShowSliderButtons() {
+        const itemPropertiesContainerSize = calculateItemPropertiesContainerSize();
+
+        if(itemPropertiesContainerSize === 0) {
+            sliderLeftButton.classList.add('hide');
+        } else {
+            sliderLeftButton.classList.remove('hide');
+        }
+    }
+
     function moveSlider(e) {
         const sliderDirection = e.target.dataset.sliderDirection;
-        const itemPropertiesContainerSize = +itemPropertiesContainer.style.left.slice(0, itemPropertiesContainer.style.left.indexOf('p'));
+        const itemPropertiesContainerSize = calculateItemPropertiesContainerSize();
         let sliderResize;
 
         if(sliderDirection === 'left') {
@@ -161,6 +177,8 @@
 
         console.log(typeof sliderResize);
         itemPropertiesContainer.style.left = itemPropertiesContainerSize + sliderResize + 'px';
+
+        hideShowSliderButtons();
     }
 
     function sliderModule() {
@@ -178,11 +196,11 @@
         populateItemInfoArea(data);
 
         itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
-        sliderButtons = document.querySelectorAll('[data-slider="button"]');
+        sliderLeftButton = document.querySelector('[data-slider="leftButton"]');
+        sliderRightButton = document.querySelector('[data-slider="rightButton"]');
 
-        sliderButtons.forEach(function (button) {
-            button.addEventListener('click', moveSlider);
-        });
+        sliderLeftButton.addEventListener('click', moveSlider);
+        sliderRightButton.addEventListener('click', moveSlider);
 
         window.addEventListener('resize', resizePropertyWrappers);
     }
