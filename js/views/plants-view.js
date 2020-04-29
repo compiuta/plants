@@ -1,7 +1,6 @@
 (function (window) {
     "use strict";
 
-    //Get dom elements
     const searchFormElements = document.querySelectorAll('[data-search="form"]');
     const searchResults = document.querySelector('[data-search="results"]');
     const bodyTag = document.querySelector('[data-element="bodyTag"]');
@@ -17,6 +16,8 @@
     let sliderLeftButton;
     let sliderRightButton;
     let itemPagePropertyWrapArr;
+    let activeSlider = 1;
+    let slidesCount;
 
     function populateCurrentYear() {
         const currentDate = new Date();
@@ -106,6 +107,8 @@
         });
 
         itemPropertiesContainer.appendChild(fragment);
+
+        itemPropertiesContainer.style.left = `0px`
     }
 
     function formatImageSrc(imageSrc) {
@@ -130,16 +133,28 @@
         ItemPageScienceName.innerText = data.Scientific_Name_x;
     }
 
-    function sliderResize() {
-        if(itemPropertiesContainer.style.left) {
+    function itemPropertiesContainerPosition() {
+        const sliceTo = itemPropertiesContainer.style.left.indexOf('p');
+        return +itemPropertiesContainer.style.left.slice(0, sliceTo);
+    }
 
+    function sliderResize() {
+        const itemPropertiesContainerCurrentSize = itemPropertiesContainerPosition();
+        const currentSingleItemPropertySize = Math.ceil(itemPagePropertyWrapArr[0].offsetWidth);
+        let newitemPropertiesPosition;
+        let currentTimeout;
+
+        if(itemPropertiesContainerCurrentSize < 0) {
+            itemPropertiesContainer.classList.remove('slide-transition');
+            newitemPropertiesPosition = `-${currentSingleItemPropertySize * (activeSlider - 1)}px`;
+            itemPropertiesContainer.style.left = newitemPropertiesPosition;
+            clearTimeout(currentTimeout);
+            currentTimeout = setTimeout(function() {itemPropertiesContainer.classList.add('slide-transition');}, 200);
         }
     }
 
     function resizePropertyWrappers() {
-        const itemInnerContainerWidth = `${itemInnerContainer.offsetWidth}px`;
-
-        console.log(itemInnerContainerWidth);
+        const itemInnerContainerWidth = `${Math.ceil(itemInnerContainer.offsetWidth)}px`;
 
         itemPagePropertyWrapArr.forEach(function (element) {
             element.style.width = itemInnerContainerWidth;
@@ -148,49 +163,40 @@
         sliderResize();
     }
 
-    function calculateItemPropertiesContainerSize() {
-        const itemPropertiesContainerSize = +itemPropertiesContainer.style.left.slice(0, itemPropertiesContainer.style.left.indexOf('p'));
-
-        return itemPropertiesContainerSize;
-    }
-
     function hideShowSliderButtons() {
-        const itemPropertiesContainerSize = calculateItemPropertiesContainerSize();
-
-        if(itemPropertiesContainerSize === 0) {
+        if(activeSlider === 1) {
             sliderLeftButton.classList.add('hide');
         } else {
             sliderLeftButton.classList.remove('hide');
+        }
+
+        if(activeSlider === slidesCount) {
+            sliderRightButton.classList.add('hide');
+        } else {
+            sliderRightButton.classList.remove('hide');
         }
     }
 
     function moveSlider(e) {
         const sliderDirection = e.target.dataset.sliderDirection;
-        const itemPropertiesContainerSize = calculateItemPropertiesContainerSize();
+        const itemPropertiesContainerSize = itemPropertiesContainerPosition();
         let sliderResize;
 
         if(sliderDirection === 'left') {
             sliderResize = itemInnerContainer.offsetWidth;
+            activeSlider -= 1;
         } else {
             sliderResize = +('-' + itemInnerContainer.offsetWidth);
+            activeSlider += 1;
         }
 
-        console.log(typeof sliderResize);
         itemPropertiesContainer.style.left = itemPropertiesContainerSize + sliderResize + 'px';
 
         hideShowSliderButtons();
     }
 
-    function sliderModule() {
-
-    }
-
     function populateItemPage(pageData) {
-        console.log(pageData);
         const data = pageData;
-
-        console.log(data);
-        console.log(itemPageTitle);
 
         populateItemProperties(data);
         populateItemInfoArea(data);
@@ -198,6 +204,7 @@
         itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
         sliderLeftButton = document.querySelector('[data-slider="leftButton"]');
         sliderRightButton = document.querySelector('[data-slider="rightButton"]');
+        slidesCount = itemPagePropertyWrapArr.length;
 
         sliderLeftButton.addEventListener('click', moveSlider);
         sliderRightButton.addEventListener('click', moveSlider);
@@ -259,8 +266,6 @@
         searchResults.innerText = '';
 
         const searchData = app.plantsController.searchData.data;
-
-        console.log(searchData);
 
         const dataFragment = document.createDocumentFragment();
 
