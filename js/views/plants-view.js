@@ -21,7 +21,8 @@
 
     function populateCurrentYear() {
         const currentDate = new Date();
-        currentYearArr.forEach(element => {
+
+        currentYearArr.forEach(function (element) {
             element.innerText = currentDate.getFullYear();
         });
     }
@@ -84,43 +85,46 @@
     }
 
     function populateItemProperties(data) {
-
         const fragment = document.createDocumentFragment();
         let indexCount = 1;
         let propertyContainerIteration = 1;
         let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
-        Object.keys(data).forEach(function(key, index) {
+        Object.keys(data).forEach(function (key, index) {
             if (data[key] !== '') {
                 const propertyElement = createItemPropertyElements(key, data[key]);
+
                 propertiesWrap.appendChild(propertyElement);
+
                 indexCount += 1;
 
-                if((indexCount % 6) === 0 || (index+=1) === Object.keys(data).length) {
+                if ((indexCount % 6) === 0 || (index += 1) === Object.keys(data).length) {
                     propertyContainerIteration += 1;
                     fragment.appendChild(propertiesWrap);
                     propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
                 }
-            } else if ((index+=1) === Object.keys(data).length) {
+            } else if ((index += 1) === Object.keys(data).length) {
                 fragment.appendChild(propertiesWrap);
             }
         });
 
         itemPropertiesContainer.appendChild(fragment);
 
-        itemPropertiesContainer.style.left = `0px`
+        itemPropertiesContainer.style.left = `0px`;
+        activeSlider = 1;
     }
 
     function formatImageSrc(imageSrc) {
         const imageStringArr = imageSrc.toLowerCase().split(',');
         const imageString = imageStringArr[0].split('/');
+
         return imageString[0];
     }
 
     function populateItemInfoArea(data) {
-        let  imagePath;
+        let imagePath;
 
-        if(data.Growth_Habit) {
+        if (data.Growth_Habit) {
             imagePath = formatImageSrc(data.Growth_Habit);
         } else {
             imagePath = 'default';
@@ -128,13 +132,14 @@
 
         itemPageImage.src = `images/${imagePath}.png`;
         itemPageTitle.innerText = data.Common_Name;
-        itemPageId.innerText = data.id
-        itemPageSymbol.innerText = data.Symbol
+        itemPageId.innerText = data.id;
+        itemPageSymbol.innerText = data.Symbol;
         ItemPageScienceName.innerText = data.Scientific_Name_x;
     }
 
     function itemPropertiesContainerPosition() {
         const sliceTo = itemPropertiesContainer.style.left.indexOf('p');
+
         return +itemPropertiesContainer.style.left.slice(0, sliceTo);
     }
 
@@ -144,12 +149,14 @@
         let newitemPropertiesPosition;
         let currentTimeout;
 
-        if(itemPropertiesContainerCurrentSize < 0) {
+        if (itemPropertiesContainerCurrentSize < 0) {
             itemPropertiesContainer.classList.remove('slide-transition');
             newitemPropertiesPosition = `-${currentSingleItemPropertySize * (activeSlider - 1)}px`;
             itemPropertiesContainer.style.left = newitemPropertiesPosition;
             clearTimeout(currentTimeout);
-            currentTimeout = setTimeout(function() {itemPropertiesContainer.classList.add('slide-transition');}, 200);
+            currentTimeout = setTimeout(function () {
+                itemPropertiesContainer.classList.add('slide-transition');
+            }, 200);
         }
     }
 
@@ -164,13 +171,13 @@
     }
 
     function hideShowSliderButtons() {
-        if(activeSlider === 1) {
+        if (activeSlider === 1) {
             sliderLeftButton.classList.add('hide');
         } else {
             sliderLeftButton.classList.remove('hide');
         }
 
-        if(activeSlider === slidesCount) {
+        if (activeSlider === slidesCount) {
             sliderRightButton.classList.add('hide');
         } else {
             sliderRightButton.classList.remove('hide');
@@ -180,17 +187,17 @@
     function moveSlider(e) {
         const sliderDirection = e.target.dataset.sliderDirection;
         const itemPropertiesContainerSize = itemPropertiesContainerPosition();
-        let sliderResize;
+        let newSliderSize;
 
-        if(sliderDirection === 'left') {
-            sliderResize = itemInnerContainer.offsetWidth;
+        if (sliderDirection === 'left') {
+            newSliderSize = itemInnerContainer.offsetWidth;
             activeSlider -= 1;
         } else {
-            sliderResize = +('-' + itemInnerContainer.offsetWidth);
+            newSliderSize = +('-' + itemInnerContainer.offsetWidth);
             activeSlider += 1;
         }
 
-        itemPropertiesContainer.style.left = itemPropertiesContainerSize + sliderResize + 'px';
+        itemPropertiesContainer.style.left = itemPropertiesContainerSize + newSliderSize + 'px';
 
         hideShowSliderButtons();
     }
@@ -210,6 +217,8 @@
         sliderRightButton.addEventListener('click', moveSlider);
 
         window.addEventListener('resize', resizePropertyWrappers);
+
+        resizePropertyWrappers();
     }
 
     function createSearchResultItem(data) {
@@ -239,7 +248,6 @@
 
         searchItem.setAttribute('href', 'javascript:void(0);');
         searchItem.setAttribute('data-plant-id', itemData.id);
-
         plantImage.setAttribute('src', `images/${plantImageSrc}.png`);
 
         searchItem.addEventListener('click', app.plantsController.getTargetPageInfo);
@@ -262,12 +270,10 @@
     }
 
     function populateSearchResults() {
+        const searchData = app.plantsController.searchData.data;
+        const dataFragment = document.createDocumentFragment();
 
         searchResults.innerText = '';
-
-        const searchData = app.plantsController.searchData.data;
-
-        const dataFragment = document.createDocumentFragment();
 
         if (searchData) {
             searchData.forEach(function (element) {
