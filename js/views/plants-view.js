@@ -73,7 +73,7 @@
         propertyTitleContainer.classList.add('item-title-container');
         propertyTitle.classList.add('item-property-title');
 
-        keyNameElement.innerText = key;
+        keyNameElement.innerText = key.replace(/_/g, ' ');
         propertyTitle.innerText = value;
 
         keyNameContainer.appendChild(keyNameElement);
