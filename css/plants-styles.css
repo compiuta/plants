@@ -498,7 +498,7 @@ html {
 }
 
 .slide-transition {
-    transition: left .3s ease-in;
+    transition: left .2s ease-in;
 }
 
 .left-slider-button,
@@ -506,12 +506,17 @@ html {
     position: absolute;
     border: 0;
     background-color: #f4fafc;
-    width: 46px;
+    width: 56px;
     padding: 0;
     height: 100%;
     font-size: 30px;
     cursor: pointer;
     z-index: 1;
+}
+
+.left-slider-button:focus,
+.right-slider-button:focus {
+    outline-color: transparent;
 }
 
 .left-slider-button {
@@ -524,7 +529,16 @@ html {
 
 .item-properties-wrap {
     height: 100%;
-    padding: 0 60px;
+    padding: 4px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 4px;
+}
+
+.item-property-container {
+    background-color: #000;
+    color: #fff;
 }
 
 .item-info-container {
