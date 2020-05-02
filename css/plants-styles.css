@@ -441,6 +441,29 @@ html {
     width: 46px;
 }
 
+.magnifying-glass {
+    font-size: 40px;
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border: 0.06em solid #551a8b;
+    position: relative;
+    border-radius: 0.35em;
+}
+
+.magnifying-glass::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    right: -0.20em;
+    bottom: -0.1em;
+    border-width: 0;
+    background-color: #551a8b;
+    width: 0.25em;
+    height: 0.06em;
+    transform: rotate(45deg);
+}
+
 .side-nav__button {
     display: flex;
     align-items: center;
@@ -457,6 +480,14 @@ html {
 .side-nav__button--active {
     background-color: #4abf69;
     color: #fff;
+}
+
+.side-nav__button:hover .magnifying-glass {
+    border: 0.06em solid #fff;
+}
+
+.side-nav__button:hover .magnifying-glass::before {
+    background-color: #fff;
 }
 
 .item-page-properties-container {
