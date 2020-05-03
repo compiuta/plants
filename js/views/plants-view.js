@@ -13,6 +13,9 @@
     const itemPageId = document.querySelector('[data-item="id"]');
     const itemPageSymbol = document.querySelector('[data-item="symbol"]');
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
+    let showSliderButton = document.querySelector('[data-js="showPropertiesSlider"]');
+    let showListButton = document.querySelector('[data-js="showPropertiesList"]');
+    let searchSimilarPlantButton = document.querySelector('[data-js="searchSimilarPlantLink"]');
     let sliderLeftButton;
     let sliderRightButton;
     let itemPagePropertyWrapArr;
@@ -112,6 +115,7 @@
 
         itemPropertiesContainer.style.left = `0px`;
         activeSlider = 1;
+        searchSimilarPlantButton.href = `index.html?search&Family=${data.Family}`;
     }
 
     function formatImageSrc(imageSrc) {

@@ -93,8 +93,6 @@
             getCurrentPageState();
             app.plantsView.populateItemPage(pageData);
             app.plantsView.toggleLoader();
-        } else {
-            return;
         }
     }
 
