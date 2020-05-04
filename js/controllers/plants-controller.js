@@ -34,19 +34,30 @@
         app.plantsModel.getData(searchParameter);
     }
 
+    function pushStateToHistory(parameter, isLink) {
+        let searchValue;
+
+        if(isLink) {
+            searchValue = parameter;
+        } else {
+            searchValue = `?search&Common_Name=${parameter}`;
+        }
+
+        if ((window.location.href).indexOf("?") > -1) {
+            const baseUrl = extractBaseUrl();
+            window.history.pushState('page2', 'Title', baseUrl + searchValue);
+        } else {
+            window.history.pushState('page2', 'Title', window.location.href + searchValue);
+        }
+    }
+
     function formSearch(e) {
         e.preventDefault();
 
         app.plantsView.toggleLoader();
         const searchValue = app.plantsView.getSearchInputValue(e.target);
 
-        if ((window.location.href).indexOf("?") > -1) {
-            const baseUrl = extractBaseUrl();
-            window.history.pushState('page2', 'Title', baseUrl + `?search&Common_Name=${searchValue}`);
-        } else {
-            window.history.pushState('page2', 'Title', window.location.href + `?search&Common_Name=${searchValue}`);
-        }
-
+        pushStateToHistory(searchValue);
         showSearchResults();
     }
 
@@ -84,7 +95,6 @@
     }
 
     function showItemPage() {
-
         const pageData = getItemPageData();
 
         console.log(pageData);
@@ -115,13 +125,16 @@
         showSearchResults: function () {
             showSearchResults();
         },
-        navigateBrowserHistory: function (e) {
+        navigateBrowserHistory: function () {
+            console.log('navigateBrowserHistory running');
             if (window.location.href.indexOf('search') > -1) {
                 app.plantsView.toggleLoader();
                 showSearchResults();
             } else if (window.location.href.indexOf('page') > -1) {
                 app.plantsView.toggleLoader();
                 showItemPage();
+            } else {
+                getCurrentPageState();
             }
         },
         fetchItemPageData: function(pageData) {
@@ -137,6 +150,9 @@
             app.plantsView.populateSearchResults();
             getCurrentPageState();
             app.plantsView.toggleLoader();
+        },
+        pushStateToHistory: function (parameter, isLink) {
+            pushStateToHistory(parameter, isLink);
         }
     }
 
