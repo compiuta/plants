@@ -16,11 +16,25 @@
     let showSliderButton = document.querySelector('[data-js="showPropertiesSlider"]');
     let showListButton = document.querySelector('[data-js="showPropertiesList"]');
     let searchSimilarPlantButton = document.querySelector('[data-js="searchSimilarPlantLink"]');
+    let currentJsLinks;
     let sliderLeftButton;
     let sliderRightButton;
     let itemPagePropertyWrapArr;
     let activeSlider = 1;
     let slidesCount;
+
+    function anchorJsLinkHandle() {
+        currentJsLinks = document.querySelectorAll('[data-js="link"]');
+
+        currentJsLinks.forEach(function (anchor) {
+            const anchorLinkParameters = anchor.dataset.parameters;
+
+            anchor.addEventListener('click', function () {
+                app.plantsController.pushStateToHistory(anchorLinkParameters, true);
+                app.plantsController.navigateBrowserHistory();
+            });
+        });
+    }
 
     function populateCurrentYear() {
         const currentDate = new Date();
@@ -58,7 +72,7 @@
         container.classList.add('item-properties-wrap');
 
         container.setAttribute('data-item', 'itemPropertiesWrap');
-        container.setAttribute('data-slider-index', iteration)
+        container.setAttribute('data-slider-index', iteration);
 
         return container;
     }
@@ -291,13 +305,20 @@
     }
 
     //Bind events
-    window.addEventListener('load', app.plantsController.navigateBrowserHistory);
-    window.addEventListener('popstate', app.plantsController.navigateBrowserHistory);
+    window.addEventListener('load', function () {
+        console.log('load event')
+        app.plantsController.navigateBrowserHistory();
+    });
+    window.addEventListener('popstate', function () {
+        console.log('popstate event')
+        app.plantsController.navigateBrowserHistory();
+    });
     searchFormElements.forEach(function (element) {
         element.addEventListener('submit', app.plantsController.formSearch);
     });
 
     populateCurrentYear();
+    anchorJsLinkHandle();
 
     console.log('View Initialised');
 
