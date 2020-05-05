@@ -15,26 +15,24 @@
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
     let showSliderButton = document.querySelector('[data-js="showPropertiesSlider"]');
     let showListButton = document.querySelector('[data-js="showPropertiesList"]');
-    let searchSimilarPlantButton = document.querySelector('[data-js="searchSimilarPlantLink"]');
-    let currentJsLinks;
+    let searchSimilarPlantButton = document.querySelector('[data-item-page="searchSimilarPlantLink"]');
+    let currentJsLinks = document.querySelectorAll('[data-js="link"]');
     let sliderLeftButton;
     let sliderRightButton;
     let itemPagePropertyWrapArr;
     let activeSlider = 1;
     let slidesCount;
 
-    function anchorJsLinkHandle() {
-        currentJsLinks = document.querySelectorAll('[data-js="link"]');
+    function anchorJsLinkHandle(e) {
+        const clickedAnchorParameters = e.target.dataset.parameters;
 
-        currentJsLinks.forEach(function (anchor) {
-            const anchorLinkParameters = anchor.dataset.parameters;
-
-            anchor.addEventListener('click', function () {
-                app.plantsController.pushStateToHistory(anchorLinkParameters, true);
-                app.plantsController.navigateBrowserHistory();
-            });
-        });
+        app.plantsController.pushStateToHistory(clickedAnchorParameters, true);
+        app.plantsController.navigateBrowserHistory();
     }
+
+    currentJsLinks.forEach(function (anchor) {
+        anchor.addEventListener('click', anchorJsLinkHandle);
+    });
 
     function populateCurrentYear() {
         const currentDate = new Date();
@@ -129,7 +127,7 @@
 
         itemPropertiesContainer.style.left = `0px`;
         activeSlider = 1;
-        searchSimilarPlantButton.href = `index.html?search&Family=${data.Family}`;
+        searchSimilarPlantButton.setAttribute('data-parameters', `?search&Family=${data.Family}`);
     }
 
     function formatImageSrc(imageSrc) {
@@ -318,7 +316,6 @@
     });
 
     populateCurrentYear();
-    anchorJsLinkHandle();
 
     console.log('View Initialised');
 
