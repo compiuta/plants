@@ -7,16 +7,16 @@
     const loader = document.querySelector('[data-js="loader"]');
     const currentYearArr = document.querySelectorAll('[data-js="currentYear"]');
     const itemPropertiesContainer = document.querySelector('[data-item="properties"]');
+    const itemListPropertistContainer = document.querySelector('[data-item="properties-list"]');
     const itemInnerContainer = document.querySelector('[data-item="innerPropertiesContainer"]');
     const itemPageImage = document.querySelector('[data-item="image"]');
     const itemPageTitle = document.querySelector('[data-item="title"]');
     const itemPageId = document.querySelector('[data-item="id"]');
     const itemPageSymbol = document.querySelector('[data-item="symbol"]');
     const ItemPageScienceName = document.querySelector('[data-item="scienceName"]');
-    let showSliderButton = document.querySelector('[data-js="showPropertiesSlider"]');
-    let showListButton = document.querySelector('[data-js="showPropertiesList"]');
-    let searchSimilarPlantButton = document.querySelector('[data-item-page="searchSimilarPlantLink"]');
-    let currentJsLinks = document.querySelectorAll('[data-js="link"]');
+    const itemPagePropertyButtons = document.querySelectorAll('[data-item-page="sideNavPropertiesButton"]');
+    const searchSimilarPlantButton = document.querySelector('[data-item-page="searchSimilarPlantLink"]');
+    const currentJsLinks = document.querySelectorAll('[data-js="link"]');
     let sliderLeftButton;
     let sliderRightButton;
     let itemPagePropertyWrapArr;
@@ -32,6 +32,31 @@
 
     currentJsLinks.forEach(function (anchor) {
         anchor.addEventListener('click', anchorJsLinkHandle);
+    });
+
+    function showSelectedPropertyDesign(e) {
+        const selectedButton = e.target;
+        const containsActiveClass = selectedButton.classList.contains('side-nav__button--active');
+
+        if (containsActiveClass === false) {
+            itemPagePropertyButtons.forEach(function (button) {
+                if (button === selectedButton) {
+                    button.classList.add('side-nav__button--active');
+                } else {
+                    button.classList.remove('side-nav__button--active');
+                }
+            });
+
+            if (selectedButton.dataset.js === 'showPropertiesList') {
+                itemInnerContainer.classList.add('show-list');
+            } else {
+                itemInnerContainer.classList.remove('show-list');
+            }
+        }
+    }
+
+    itemPagePropertyButtons.forEach(function (button) {
+        button.addEventListener('click', showSelectedPropertyDesign);
     });
 
     function populateCurrentYear() {
