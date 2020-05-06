@@ -214,8 +214,8 @@
                        inkscape:connector-curvature="0" />
                   </svg>
                 </a>
-                <a href="javascript:void(0)" data-js="showPropertiesSlider" class="side-nav__button side-nav__button--active">&#9750;</a>
-                <a href="javascript:void(0)" data-js="showPropertiesList" class="side-nav__button">☷</a>
+                <a href="javascript:void(0)" data-item-page="sideNavPropertiesButton" data-js="showPropertiesSlider" class="side-nav__button side-nav__button--active">&#9750;</a>
+                <a href="javascript:void(0)" data-item-page="sideNavPropertiesButton" data-js="showPropertiesList" class="side-nav__button">☷</a>
                 <a href="javascript:void(0)" data-item-page="searchSimilarPlantLink" data-js="link" class="side-nav__button">
                   <div class="magnifying-glass"></div>
                 </a>
@@ -223,15 +223,19 @@
               <div class="item-page-properties-container">
                 <form data-search="form" class="search-form">
                   <input data-search="searchInput" type="text" class="search-form__input" placeholder="Search Plants...">
-                 <div class="search-icon">
-                   <div class="magnifying-glass"></div>
-                 </div>
-
+                  <div class="search-icon">
+                    <div class="magnifying-glass"></div>
+                  </div>
                 </form>
                 <div data-item="innerPropertiesContainer" class="inner-properties-container">
-                    <button data-slider="leftButton" data-slider-direction="left" class="slider-button left-slider-button hide">‹</button>
-                    <button data-slider="rightButton" data-slider-direction="right" class="slider-button right-slider-button">›</button>
-                    <div data-item="properties" class="item-properties-container slide-transition"></div>
+                    <div class="slider-design">
+                      <button data-slider="leftButton" data-slider-direction="left" class="slider-button left-slider-button hide">‹</button>
+                      <button data-slider="rightButton" data-slider-direction="right" class="slider-button right-slider-button">›</button>
+                      <div data-item="properties" class="item-properties-container slide-transition"></div>
+                    </div>
+                    <div class="list-design">
+                      <div data-item="properties-list" class="item-properties-container"></div>
+                    </div>
                 </div>
               </div>
               <div class="item-info-container">
