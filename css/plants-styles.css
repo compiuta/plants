@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-html {
-	scroll-behavior: smooth;
-}
-
 .body-tag {
     margin: 0;
     font-family: PT Sans, Arial, Helvetica, sans-serif;
@@ -527,6 +523,23 @@ html {
 
 .show-list .list-design {
     display: block;
+}
+
+.list-design {
+    height: 100%;
+    position: relative;
+    overflow-y: scroll;
+}
+
+.item-properties-table {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.table-header {
+    padding: 10px;
+    text-align: left;
 }
 
 .item-properties-container {
