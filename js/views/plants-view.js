@@ -87,6 +87,10 @@
                 bodyTag.classList.add(element);
             }
         });
+
+        if (pageState !== 'landing') {
+            window.scroll(0, 0);
+        }
     }
 
     function createContainerForPropertyElements(iteration) {
@@ -153,6 +157,34 @@
         itemPropertiesContainer.style.left = `0px`;
         activeSlider = 1;
         searchSimilarPlantButton.setAttribute('data-parameters', `?search&Family=${data.Family}`);
+    }
+
+    function populatePropertyTable(data) {
+        const tableFragment = document.createDocumentFragment();
+        let propertyIndex = 1;
+
+        Object.keys(data).forEach(function (key) {
+            if (data[key] !== '') {
+                const propertyRow = document.createElement('tr');
+                const propertyCell = document.createElement('td');
+                const valueCell = document.createElement('td');
+                const indexCell = document.createElement('td');
+
+                indexCell.innerText = propertyIndex;
+                propertyCell.innerText = key;
+                valueCell.innerText = data[key];
+
+                propertyRow.appendChild(indexCell);
+                propertyRow.appendChild(propertyCell);
+                propertyRow.appendChild(valueCell);
+
+                tableFragment.appendChild(propertyRow);
+
+                propertyIndex += 1;
+            }
+        });
+
+        itemListPropertistContainer.appendChild(tableFragment);
     }
 
     function formatImageSrc(imageSrc) {
@@ -247,6 +279,7 @@
         const data = pageData;
 
         populateItemProperties(data);
+        populatePropertyTable(data);
         populateItemInfoArea(data);
 
         itemPagePropertyWrapArr = document.querySelectorAll('[data-item="itemPropertiesWrap"]');
