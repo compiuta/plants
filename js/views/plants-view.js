@@ -169,9 +169,15 @@
                 const propertyCell = document.createElement('td');
                 const valueCell = document.createElement('td');
                 const indexCell = document.createElement('td');
+                const formattedKey = key.replace(/_/g, ' ');
+
+                propertyRow.classList.add('property-table-row');
+                propertyCell.classList.add('property-table-cell');
+                valueCell.classList.add('property-table-cell');
+                indexCell.classList.add('index-table-cell');
 
                 indexCell.innerText = propertyIndex;
-                propertyCell.innerText = key;
+                propertyCell.innerText = formattedKey;
                 valueCell.innerText = data[key];
 
                 propertyRow.appendChild(indexCell);
