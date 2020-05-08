@@ -533,13 +533,36 @@
 
 .item-properties-table {
     position: absolute;
+    border-collapse: collapse;
     top: 0;
     left: 0;
 }
 
-.table-header {
+.table-header,
+.table-index-header {
     padding: 10px;
     text-align: left;
+    position: sticky;
+    top: 0;
+    background-color: #f4fafc;
+}
+
+.table-header {
+    min-width: 200px;
+}
+
+.property-table-cell,
+.index-table-cell {
+    padding: 10px;
+    text-transform: capitalize;
+}
+
+.property-table-row:nth-child(even) {
+    background-color: #f4fafc;
+}
+
+.property-table-row:nth-child(odd) {
+    background: #fff;
 }
 
 .item-properties-container {
