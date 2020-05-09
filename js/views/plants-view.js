@@ -251,15 +251,19 @@
 
     function hideShowSliderButtons() {
         if (activeSlider === 1) {
-            sliderLeftButton.classList.add('hide');
+            sliderLeftButton.classList.add('slider-button-disabled');
+            sliderLeftButton.setAttribute('disabled', 'disabled');
         } else {
-            sliderLeftButton.classList.remove('hide');
+            sliderLeftButton.classList.remove('slider-button-disabled');
+            sliderLeftButton.removeAttribute('disabled');
         }
 
         if (activeSlider === slidesCount) {
-            sliderRightButton.classList.add('hide');
+            sliderRightButton.classList.add('slider-button-disabled');
+            sliderRightButton.setAttribute('disabled', 'disabled');
         } else {
-            sliderRightButton.classList.remove('hide');
+            sliderRightButton.classList.remove('slider-button-disabled');
+            sliderRightButton.removeAttribute('disabled');
         }
     }
 
