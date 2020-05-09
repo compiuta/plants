@@ -130,7 +130,7 @@
 
     function populateItemProperties(data) {
         const fragment = document.createDocumentFragment();
-        let indexCount = 1;
+        let indexCount = 0;
         let propertyContainerIteration = 1;
         let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
