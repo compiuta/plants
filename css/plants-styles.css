@@ -575,6 +575,10 @@
     transition: left .2s ease-in;
 }
 
+.slider-button-disabled .button-arrow {
+    display: none;
+}
+
 .left-slider-button,
 .right-slider-button {
     position: absolute;
@@ -611,8 +615,26 @@
 }
 
 .item-property-container {
-    background-color: #000;
+    background: linear-gradient(#f8663e, #f75e3e);
     color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px;
+    font-size: 18px;
+}
+
+.item-property-title {
+    margin: 0;
+}
+
+.item-key-name {
+    margin: 0 0 10px 0;
+    padding: 5px 26px 10px 0;
+    border-bottom: 3px solid #fff;
+    display: inline-block;
 }
 
 .item-info-container {
