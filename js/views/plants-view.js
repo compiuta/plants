@@ -134,6 +134,8 @@
         let propertyContainerIteration = 1;
         let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
+        itemPropertiesContainer.innerHTML = '';
+
         Object.keys(data).forEach(function (key, index) {
             if (data[key] !== '') {
                 const propertyElement = createItemPropertyElements(key, data[key]);
@@ -162,6 +164,8 @@
     function populatePropertyTable(data) {
         const tableFragment = document.createDocumentFragment();
         let propertyIndex = 1;
+
+        itemListPropertistContainer.innerHTML = '';
 
         Object.keys(data).forEach(function (key) {
             if (data[key] !== '') {
@@ -303,6 +307,7 @@
         window.addEventListener('resize', resizePropertyWrappers);
 
         resizePropertyWrappers();
+        hideShowSliderButtons();
     }
 
     function createSearchResultItem(data) {
