@@ -36,11 +36,12 @@
 
     function pushStateToHistory(parameter, isLink) {
         let searchValue;
+        let searchParameters = parameter.toLowerCase();
 
         if(isLink) {
-            searchValue = parameter;
+            searchValue = searchParameters;
         } else {
-            searchValue = `?search&Common_Name=${parameter}`;
+            searchValue = `?search&Common_Name=${searchParameters}`;
         }
 
         if ((window.location.href).indexOf("?") > -1) {
