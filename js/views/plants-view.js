@@ -395,7 +395,7 @@
     const plantsView = {
         getSearchInputValue: function (form) {
             let formInput = form.querySelector('[data-search="searchInput"]')
-            const searchInputValue = formInput.value;
+            const searchInputValue = formInput.value.toLowerCase();
 
             formInput.value = '';
 
