@@ -394,7 +394,10 @@
 
     const plantsView = {
         getSearchInputValue: function (form) {
-            const searchInputValue = form.querySelector('[data-search="searchInput"]').value;
+            let formInput = form.querySelector('[data-search="searchInput"]')
+            const searchInputValue = formInput.value;
+
+            formInput.value = '';
 
             return searchInputValue;
         },
