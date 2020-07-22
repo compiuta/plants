@@ -24,7 +24,7 @@
     let slidesCount;
 
     function anchorJsLinkHandle(e) {
-        const clickedAnchorParameters = e.target.dataset.parameters;
+        const clickedAnchorParameters = e.currentTarget.dataset.parameters;
 
         app.plantsController.pushStateToHistory(clickedAnchorParameters, true);
         app.plantsController.navigateBrowserHistory();
