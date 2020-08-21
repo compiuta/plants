@@ -135,7 +135,7 @@
         let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
         itemPropertiesContainer.innerHTML = '';
-
+console.log(data)
         Object.keys(data).forEach(function (key, index) {
             if (data[key] !== '') {
                 const propertyElement = createItemPropertyElements(key, data[key]);
@@ -158,7 +158,7 @@
 
         itemPropertiesContainer.style.left = `0px`;
         activeSlider = 1;
-        searchSimilarPlantButton.setAttribute('data-parameters', `?search&Family=${data.Family}`);
+        searchSimilarPlantButton.setAttribute('data-parameters', `?search&species=${data.Species}`);
     }
 
     function populatePropertyTable(data) {
@@ -290,8 +290,7 @@
     }
 
     function populateItemPage(pageData) {
-        const data = pageData;
-
+        const data = pageData[0];
         populateItemProperties(data);
         populatePropertyTable(data);
         populateItemInfoArea(data);
@@ -336,7 +335,7 @@
         searchItem.appendChild(searchItemInner);
 
         searchItem.setAttribute('href', 'javascript:void(0);');
-        searchItem.setAttribute('data-plant-id', itemData.id);
+        searchItem.setAttribute('data-plant-id', itemData.Symbol);
         plantImage.setAttribute('src', `images/${plantImageSrc}.png`);
 
         searchItem.addEventListener('click', app.plantsController.getTargetPageInfo);
@@ -359,12 +358,12 @@
     }
 
     function populateSearchResults() {
-        const searchData = app.plantsController.searchData.data;
+        const searchData = app.plantsController.searchData;
         const dataFragment = document.createDocumentFragment();
 
         searchResults.innerText = '';
 
-        if (searchData) {
+        if (searchData.length > 0) {
             searchData.forEach(function (element) {
                 dataFragment.appendChild(createSearchResultItem(element));
             });
@@ -395,7 +394,7 @@
     const plantsView = {
         getSearchInputValue: function (form) {
             let formInput = form.querySelector('[data-search="searchInput"]')
-            const searchInputValue = formInput.value.toLowerCase();
+            const searchInputValue = formInput.value.replace(/ /g, '+');
 
             formInput.value = '';
 
