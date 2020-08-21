@@ -31,7 +31,7 @@
 
     function showSearchResults() {
         const searchParameter = extractSearchParameter();
-        app.plantsModel.getData(searchParameter);
+        app.plantsModel.getData(searchParameter, 'allNames');
     }
 
     function pushStateToHistory(parameter, isLink) {
@@ -103,7 +103,7 @@
             app.plantsView.populateItemPage(pageData);
             app.plantsView.toggleLoader();
         } else {
-            app.plantsModel.getData(itemId, true);
+            app.plantsModel.getData(itemId, 'code');
         }
     }
 
