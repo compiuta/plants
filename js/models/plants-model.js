@@ -6,7 +6,6 @@
         let plantObjectArr = [];
 
         plantData.forEach(el => {
-            if (el.recordType === 'SPECIES') {
                 const plantObject = {
                     id: el.elementGlobalId,
                     Symbol: el.elcode,
@@ -20,24 +19,25 @@
                 }
     
                 plantObjectArr.push(plantObject);
-            }
         });
 
         return plantObjectArr;
 
     }
 
-    function getData(searchValue, populatePage) {
-        const searchUrl = `https://explorer.natureserve.org/api/data/search`;
+    function getData(searchValue, searchType) {
+        const searchUrl = `https://explorer.natureserve.org/api/data/speciesSearch`;
     
         const sendObj = {
-            "criteriaType" : "combined",
-            "textCriteria" : [
-              {
-            "paramType" : "quickSearch",
-            "searchToken" : `${searchValue}`
-          }
-          ],
+            "criteriaType" : "species",
+            "textCriteria" : [ 
+                  {
+                    "paramType" : "textSearch",
+                    "searchToken" : searchValue,
+                    "matchAgainst" : searchType,
+                    "operator" : "contains"
+                  }
+            ],
             "statusCriteria" : [ ],
             "locationCriteria" : [ ],
             "pagingOptions" : {
@@ -48,9 +48,14 @@
             "modifiedSince" : null,
             "locationOptions" : null,
             "classificationOptions" : null,
-            "recordTypeCriteria" : [ ]
+            "speciesTaxonomyCriteria" : [
+                {
+                    "paramType" : "scientificTaxonomy",
+                    "level" : "KINGDOM",
+                    "scientificTaxonomy" : "Plantae"
+                  }
+             ]
           }
-          console.log(searchValue);
 
         fetch(searchUrl, {
            method: 'POST',
@@ -66,9 +71,7 @@
 
                 app.plantsController.searchData = plantData;
 
-                console.log(plantData)
-
-                if (populatePage) {
+                if (searchType === 'code') {
                     console.log('hello ' + plantData);
                     app.plantsController.fetchItemPageData(plantData);
                 } else {
@@ -85,8 +88,8 @@
     console.log('Model Initialised');
 
     const plantsModel = {
-        getData: function (searchValue, populatePage) {
-            getData(searchValue, populatePage);
+        getData: function (searchValue, searchType) {
+            getData(searchValue, searchType);
         }
     }
 
