@@ -17,8 +17,8 @@
 
     function extractSearchParameter() {
         const url = window.location.href;
-        const searchParameter = url.substr(url.indexOf("&") + 1);
-
+        const urlSearchParameter = url.substr(url.indexOf("=") + 1);
+        const searchParameter = urlSearchParameter.replace(/'+'/g, ' ');
         return searchParameter;
     }
 
@@ -40,7 +40,7 @@
         if(isLink) {
             searchValue = parameter;
         } else {
-            searchValue = `?search&Common_Name=${parameter}`;
+            searchValue = `?search&common_name=${parameter}`;
         }
 
         if ((window.location.href).indexOf("?") > -1) {
@@ -62,10 +62,12 @@
     }
 
     function searchLocalData(propertyToSearch) {
-        const savedData = app.plantsController.searchData.data;
-
-        if (savedData) {
-            const searchedData = savedData.filter(x => x.id === (+propertyToSearch))[0];
+        const savedData = app.plantsController.searchData;
+        console.log(savedData)
+        
+        if (savedData && (Object.keys(savedData).length > 0)) {
+            const searchedData = savedData.filter(x => x.Symbol === propertyToSearch)[0];
+            
             return searchedData;
         } else {
             return undefined;
@@ -79,30 +81,29 @@
         app.plantsView.toggleLoader();
     }
 
-    function getItemPageData() {
-        const url = window.location.href;
-        const startSliceIndex = url.indexOf('=') + 1;
-        const itemId = url.slice(startSliceIndex);
+    function getItemPageData(itemId) {
         let data;
 
         if (searchLocalData(itemId)) {
-            data =  searchLocalData(itemId);
-            console.log(data);
-            return data;
-        } else {
-            app.plantsModel.getData(`id=${itemId}`);
+            data = searchLocalData(itemId);
         }
+
+        return data;
     }
 
     function showItemPage() {
+        const url = window.location.href;
+        const startSliceIndex = url.indexOf('=') + 1;
+        const itemId = url.slice(startSliceIndex);
         const pageData = getItemPageData();
-
         console.log(pageData);
 
         if (pageData) {
             getCurrentPageState();
             app.plantsView.populateItemPage(pageData);
             app.plantsView.toggleLoader();
+        } else {
+            app.plantsModel.getData(itemId, true);
         }
     }
 
