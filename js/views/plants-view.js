@@ -135,7 +135,7 @@
         let propertiesWrap = createContainerForPropertyElements(propertyContainerIteration);
 
         itemPropertiesContainer.innerHTML = '';
-console.log(data)
+
         Object.keys(data).forEach(function (key, index) {
             if (data[key] !== '') {
                 const propertyElement = createItemPropertyElements(key, data[key]);
@@ -299,7 +299,7 @@ console.log(data)
         sliderLeftButton = document.querySelector('[data-slider="leftButton"]');
         sliderRightButton = document.querySelector('[data-slider="rightButton"]');
         slidesCount = itemPagePropertyWrapArr.length;
-
+        console.log(`slidesCount: ${slidesCount}`)
         sliderLeftButton.addEventListener('click', moveSlider);
         sliderRightButton.addEventListener('click', moveSlider);
 

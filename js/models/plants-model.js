@@ -72,7 +72,6 @@
                 app.plantsController.searchData = plantData;
 
                 if (searchType === 'code') {
-                    console.log('hello ' + plantData);
                     app.plantsController.fetchItemPageData(plantData);
                 } else {
                     app.plantsController.populateData();

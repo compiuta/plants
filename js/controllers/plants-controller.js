@@ -63,7 +63,6 @@
 
     function searchLocalData(propertyToSearch) {
         const savedData = app.plantsController.searchData;
-        console.log(savedData)
         
         if (savedData && (Object.keys(savedData).length > 0)) {
             const searchedData = savedData.filter(x => x.Symbol === propertyToSearch)[0];
@@ -96,7 +95,6 @@
         const startSliceIndex = url.indexOf('=') + 1;
         const itemId = url.slice(startSliceIndex);
         const pageData = getItemPageData();
-        console.log(pageData);
 
         if (pageData) {
             getCurrentPageState();
