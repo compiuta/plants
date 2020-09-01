@@ -466,6 +466,7 @@
     min-height: 100px;
     margin: 0 0 10px 0;
     border-radius: 20px;
+    color: #000;
     transition: background-color .1s ease-in-out;
     text-decoration: none;
     font-size: 25px;
@@ -527,7 +528,7 @@
 .list-design {
     height: 100%;
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .item-properties-table {
@@ -574,10 +575,6 @@
     transition: left .2s ease-in;
 }
 
-.slider-button-disabled .button-arrow {
-    display: none;
-}
-
 .left-slider-button,
 .right-slider-button {
     position: absolute;
@@ -602,6 +599,14 @@
 
 .right-slider-button {
     right: 0;
+}
+
+.slider-button-disabled {
+    cursor: default;
+}
+
+.slider-button-disabled .button-arrow {
+    display: none;
 }
 
 .item-properties-wrap {
